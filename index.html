@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>北京之旅 2026 | 离线随身手册</title>
+    <style>
+        :root {
+            --bg-main: #0b1120;
+            --bg-card: #1e293b;
+            --bg-card-hover: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-red: #ef4444;
+            --accent-amber: #f59e0b;
+            --accent-green: #10b981;
+            --accent-blue: #38bdf8;
+            --border-color: rgba(255, 255, 255, 0.15);
+            
+            --font-base: 14px;
+            --font-title: 16px;
+            --font-head: 18px;
+        }
+
+        body.font-md { --font-base: 14px; --font-title: 16px; --font-head: 18px; }
+        body.font-lg { --font-base: 17px; --font-title: 19px; --font-head: 22px; }
+        body.font-xl { --font-base: 20px; --font-title: 23px; --font-head: 26px; }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: #020617; color: var(--text-primary); line-height: 1.6; font-size: var(--font-base); transition: font-size 0.2s ease; }
+        
+        .app-container { max-width: 450px; margin: 0 auto; min-height: 100dvh; background-color: var(--bg-main); display: flex; flex-direction: column; position: relative; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); }
+        
+        header.subpage-header { 
+            background: rgba(11, 17, 32, 0.95); 
+            backdrop-filter: blur(12px); 
+            border-bottom: 1px solid var(--border-color); 
+            padding: 12px 16px; 
+            position: sticky; 
+            top: 0; 
+            z-index: 50; 
+            display: none; 
+            justify-content: space-between; 
+            align-items: center; 
+            height: 61px;
+        }
+        .header-left { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .brand-icon { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #e11d48, #9f1239); color: #ffffff; font-weight: bold; font-size: 17px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(225, 29, 72, 0.35); flex-shrink: 0; }
+        
+        .header-title h1 { font-size: 16px !important; font-weight: 700; color: #f8fafc; letter-spacing: 0.5px; line-height: 1.2; }
+        .header-title p { font-size: 11px !important; color: var(--text-secondary); }
+        
+        .font-adjuster { display: flex; align-items: center; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid var(--border-color); border-radius: 20px; padding: 2px 8px; gap: 4px; }
+        .font-btn { background: none; border: none; color: var(--accent-amber); font-weight: bold; font-size: 12px; padding: 3px 6px; cursor: pointer; border-radius: 12px; }
+        .font-btn:active { background: var(--bg-card-hover); }
+        .font-indicator { font-size: 10px; color: var(--text-secondary); padding: 0 2px; }
+
+        main { flex: 1; padding: 14px; padding-bottom: 90px; }
+        main.is-home { padding: 0; overflow: hidden; }
+
+        .page-view { display: none; }
+        .page-view.active { display: block; animation: fadeIn 0.25s ease-out; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 14px; margin-bottom: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.2); }
+        .card-title { font-size: var(--font-title); font-weight: 700; color: #f8fafc; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-bottom: 10px; }
+
+        .home-fullscreen-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100dvh;
+            max-height: 100dvh;
+            padding: calc(14px + env(safe-area-inset-top)) 16px calc(14px + env(safe-area-inset-bottom)) 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            background: linear-gradient(180deg, rgba(11, 17, 32, 0.3) 0%, rgba(11, 17, 32, 0.45) 50%, rgba(11, 17, 32, 0.95) 100%), 
+                        url('https://www.chinatraveltime.com/cdn/shop/files/The_Forbidden_City_Beijing_tour_China_travel_10_bd74226a-c579-4f90-858f-83428e318ba2_620x_crop_center.jpg?v=1784857844') center/cover no-repeat #0f172a;
+        }
+
+        .home-top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .home-hero-center {
+            position: absolute;
+            top: 32%;
+            left: 16px;
+            right: 16px;
+            transform: translateY(-50%);
+            text-align: left;
+            pointer-events: none;
+        }
+        .home-hero-center h1 {
+            font-size: calc(var(--font-head) * 1.5) !important;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 4px 16px rgba(0,0,0,0.95), 0 2px 4px rgba(0,0,0,0.8);
+            letter-spacing: 1px;
+            line-height: 1.15;
+        }
+        .home-hero-center p {
+            font-size: calc(var(--font-title) * 1.3) !important;
+            color: #f1f5f9;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.95);
+            margin-top: 6px;
+            letter-spacing: 2px;
+        }
+
+        .grid-shortcuts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 10px; }
+        .shortcut-btn-glass { 
+            background: rgba(15, 23, 42, 0.6); 
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.18); 
+            border-radius: 14px; 
+            padding: 10px 2px; 
+            text-align: center; 
+            cursor: pointer; 
+            transition: all 0.2s ease; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 4px; 
+            box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.35);
+        }
+        .shortcut-btn-glass:active { transform: scale(0.94); background: rgba(30, 41, 59, 0.85); border-color: var(--accent-amber); }
+        .shortcut-icon { font-size: 20px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+        .shortcut-label { font-size: calc(var(--font-base) - 3px); font-weight: 600; color: #ffffff; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 16px;
+            padding: 12px 14px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        .sticky-day-header {
+            position: sticky;
+            top: 61px;
+            z-index: 45;
+            background: rgba(11, 17, 32, 0.96);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 8px 14px 6px 14px;
+            margin: -14px -14px 12px -14px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+        .day-switcher-row { display: flex; align-items: center; justify-content: center; gap: 12px; }
+        .day-nav-arrow-clean { background: none; border: none; color: var(--accent-amber); font-weight: bold; font-size: 18px; cursor: pointer; padding: 2px 8px; }
+        .day-nav-arrow-clean:disabled { opacity: 0.2; cursor: not-allowed; }
+        .day-picker-select-clean { background: none; border: none; color: #fff; font-size: var(--font-title); font-weight: bold; text-align: center; text-align-last: center; outline: none; cursor: pointer; padding: 2px 0; max-width: 220px; }
+        
+        .day-title-wrap { 
+            text-align: center; 
+            font-size: var(--font-title); 
+            font-weight: bold; 
+            color: var(--accent-amber); 
+            margin-top: 4px; 
+            border-top: 1px dashed rgba(255,255,255,0.1); 
+            padding-top: 4px; 
+            line-height: 1.3; 
+            transition: all 0.3s ease;
+            max-height: 50px;
+            opacity: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .sticky-day-header.is-scrolled .day-title-wrap {
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .timeline { position: relative; padding-left: 24px; border-left: 2px solid var(--border-color); margin-left: 10px; margin-top: 10px; }
+        .timeline-item { position: relative; margin-bottom: 22px; }
+        
+        .timeline-dot-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .timeline-dot { 
+            position: absolute; 
+            left: -31px; 
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px; 
+            height: 12px; 
+            border-radius: 50%; 
+            border: 2px solid var(--bg-main); 
+            z-index: 2; 
+        }
+        .dot-fixed { background: var(--accent-red); box-shadow: 0 0 6px rgba(239, 68, 68, 0.6); }
+        .dot-meal { background: var(--accent-amber); box-shadow: 0 0 6px rgba(245, 158, 11, 0.6); }
+        .dot-free { background: var(--accent-blue); box-shadow: 0 0 6px rgba(56, 189, 248, 0.6); }
+
+        .timeline-time { font-size: calc(var(--font-base) - 1px); font-weight: bold; color: var(--accent-amber); display: flex; align-items: center; gap: 6px; line-height: 1.2; }
+        .timeline-time-free { font-size: calc(var(--font-base) - 1px); font-weight: bold; color: var(--accent-blue); display: flex; align-items: center; gap: 6px; line-height: 1.2; }
+        .timeline-title { font-size: var(--font-title); font-weight: bold; color: #f8fafc; margin-top: 4px; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+        .timeline-sub { font-size: calc(var(--font-base) - 1px); color: var(--text-secondary); margin-top: 2px; line-height: 1.5; }
+
+        .transit-connector { position: relative; margin: 12px 0 12px -35px; z-index: 1; }
+        .transit-pill { display: inline-flex; align-items: center; background: #0b1120; border: 1px solid var(--border-color); color: var(--text-secondary); font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+
+        .free-flexible-box { background: rgba(56, 189, 248, 0.05); border: 1.5px dashed rgba(56, 189, 248, 0.4); border-radius: 12px; padding: 8px 12px; margin-top: 6px; }
+        .free-flexible-box ul { list-style-type: disc; padding-left: 18px; margin-top: 2px; }
+        .free-flexible-box li { font-size: calc(var(--font-base) - 1px); color: #e2e8f0; margin-bottom: 4px; line-height: 1.4; }
+        .free-flexible-box li:last-child { margin-bottom: 0; }
+
+        .meeting-box-outside { background: rgba(239, 68, 68, 0.12); border: 1px dashed var(--accent-red); padding: 6px 10px; border-radius: 8px; margin-top: 8px; font-size: calc(var(--font-base) - 1px); font-weight: bold; color: #f87171; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+        .meeting-text { flex: 1; word-break: break-word; }
+
+        .inline-subtle-map { background: rgba(255, 255, 255, 0.08); border: 1px solid var(--border-color); color: var(--text-secondary); padding: 2px 8px; border-radius: 6px; text-decoration: none; font-size: 11px; font-weight: normal; display: inline-flex; align-items: center; white-space: nowrap; flex-shrink: 0; }
+        .inline-subtle-map:active { background: var(--bg-card-hover); color: #fff; }
+
+        .action-tag-btn { display: inline-flex; align-items: center; gap: 4px; font-size: calc(var(--font-base) - 2px); font-weight: 600; padding: 4px 10px; border-radius: 10px; margin-top: 6px; cursor: pointer; border: none; text-decoration: none; }
+        .btn-ticket { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+        .btn-flight { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+        .btn-prep { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+
+        .badge { font-size: calc(var(--font-base) - 3px); font-weight: 600; padding: 2px 8px; border-radius: 10px; }
+        .badge-free { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-size: 11px; }
+        .badge-amber { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .badge-blue { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+
+        .check-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px dashed rgba(255, 255, 255, 0.08); cursor: pointer; }
+        .check-item:last-child { border-bottom: none; }
+        .check-item input[type="checkbox"] { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent-amber); cursor: pointer; flex-shrink: 0; }
+        .check-label { font-size: calc(var(--font-base) - 1px); color: var(--text-primary); transition: all 0.2s ease; line-height: 1.4; user-select: none; flex: 1; }
+        .check-item input[type="checkbox"]:checked + .check-label { text-decoration: line-through; color: #64748b; }
+
+        .calc-input-group { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+        .calc-box { background: #0b1120; border: 1px solid var(--border-color); border-radius: 14px; padding: 12px 16px; }
+        .calc-box label { font-size: calc(var(--font-base) - 1px); color: var(--text-secondary); margin-bottom: 4px; display: block; font-weight: bold; }
+        .calc-input-row { display: flex; align-items: center; justify-content: space-between; }
+        .calc-symbol { font-size: 22px; font-weight: bold; color: var(--text-secondary); margin-right: 8px; }
+        .calc-box input { width: 100%; background: transparent; border: none; color: #38bdf8; font-size: 28px; font-weight: bold; outline: none; text-align: right; }
+        .calc-box input.rmb-input { color: #f59e0b; }
+
+        .rate-table { width: 100%; border-collapse: collapse; font-size: var(--font-base); text-align: left; }
+        .rate-table th { background: #0b1120; color: var(--text-secondary); padding: 8px 10px; font-weight: 600; font-size: calc(var(--font-base) - 1px); border-bottom: 1px solid var(--border-color); }
+        .rate-table td { padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #e2e8f0; }
+
+        .ticket-spot-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .ticket-spot-card:active { background: var(--bg-card-hover); }
+
+        nav.bottom-nav { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: rgba(11, 17, 32, 0.95); backdrop-filter: blur(12px); border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; padding: 8px 0; z-index: 50; }
+        .nav-item { background: none; border: none; color: var(--text-secondary); font-size: calc(var(--font-base) - 3px); display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; flex: 1; }
+        .nav-item.active { color: #f43f5e; font-weight: bold; }
+        .nav-item-icon { font-size: 18px; }
+
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(6px); z-index: 100; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .modal-overlay.active { display: flex; }
+        .modal-body { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; width: 100%; max-width: 380px; padding: 20px; position: relative; max-height: 85vh; overflow-y: auto; text-align: left; }
+        .modal-close { position: absolute; top: 14px; right: 16px; background: none; border: none; color: var(--text-secondary); font-size: 22px; cursor: pointer; }
+        .qr-placeholder-box { background: #ffffff; color: #000; padding: 16px; border-radius: 12px; margin: 12px 0; border: 2px dashed #000; text-align: center; }
+    </style>
+</head>
+<body class="font-md">
+
+<div class="app-container">
+    <header id="app-header" class="subpage-header">
+        <div class="header-left" onclick="showPage('home')">
+            <div class="brand-icon">京</div>
+            <div class="header-title">
+                <h1>北京之旅 2026</h1>
+                <p>10.19-10.30</p>
+            </div>
+        </div>
+        
+        <div class="font-adjuster">
+            <button class="font-btn" onclick="changeFontSize(-1)">A-</button>
+            <span class="font-indicator" id="font-level-text-sub">标准</span>
+            <button class="font-btn" onclick="changeFontSize(1)">A+</button>
+        </div>
+    </header>
+
+    <main id="main-container" class="is-home">
+        <div id="page-home" class="page-view active">
+            <div class="home-fullscreen-wrapper">
+                <div class="home-top-bar">
+                    <div class="brand-icon">京</div>
+                    <div class="font-adjuster">
+                        <button class="font-btn" onclick="changeFontSize(-1)">A-</button>
+                        <span class="font-indicator" id="font-level-text-home">标准</span>
+                        <button class="font-btn" onclick="changeFontSize(1)">A+</button>
+                    </div>
+                </div>
+
+                <div class="home-hero-center">
+                    <h1>北京之旅 2026</h1>
+                    <p>10.19 - 10.30</p>
+                </div>
+
+                <div style="margin-top: auto;">
+                    <div class="grid-shortcuts">
+                        <div class="shortcut-btn-glass" onclick="goToCurrentOrNearestDay()">
+                            <span class="shortcut-icon">📍</span>
+                            <span class="shortcut-label">当日行程</span>
+                        </div>
+                        <div class="shortcut-btn-glass" onclick="showPage('tickets')">
+                            <span class="shortcut-icon">🎫</span>
+                            <span class="shortcut-label">门票预约</span>
+                        </div>
+                        <div class="shortcut-btn-glass" onclick="showPage('itinerary-all')">
+                            <span class="shortcut-icon">🗓️</span>
+                            <span class="shortcut-label">行程总览</span>
+                        </div>
+                        <div class="shortcut-btn-glass" onclick="showPage('rate')">
+                            <span class="shortcut-icon">💱</span>
+                            <span class="shortcut-label">汇率换算</span>
+                        </div>
+                        <div class="shortcut-btn-glass" onclick="showPage('flights')">
+                            <span class="shortcut-icon">✈️</span>
+                            <span class="shortcut-label">机票航班</span>
+                        </div>
+                        <div class="shortcut-btn-glass" onclick="showPage('hotels')">
+                            <span class="shortcut-icon">🏨</span>
+                            <span class="shortcut-label">住宿信息</span>
+                        </div>
+                        <div class="shortcut-btn-glass" onclick="showPage('checklist')">
+                            <span class="shortcut-icon">🎒</span>
+                            <span class="shortcut-label">行前清单</span>
+                        </div>
+                        <div class="shortcut-btn-glass" onclick="showPage('info')">
+                            <span class="shortcut-icon">ℹ️</span>
+                            <span class="shortcut-label">重要讯息</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card">
+                        <div class="card-header" style="border-bottom-color: rgba(255,255,255,0.15);">
+                            <span class="card-title" style="margin:0; font-size: var(--font-title);" id="home-today-card-title">🌤️ 今日行程快览</span>
+                            <span class="badge badge-blue" id="home-date-badge">10/19 (Day 0)</span>
+                        </div>
+                        <div id="home-today-summary" style="font-size: var(--font-base); color: #e2e8f0;">
+                            正在加载行程...
+                        </div>
+                        <button onclick="goToCurrentOrNearestDay()" style="width: 100%; margin-top: 8px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: #38bdf8; padding: 7px; border-radius: 12px; font-size: var(--font-base); font-weight: 600; cursor: pointer; backdrop-filter: blur(8px);">进入当日行程详情 ➔</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-itinerary-today" class="page-view">
+            <div class="sticky-day-header" id="sticky-day-header">
+                <div class="day-switcher-row">
+                    <button class="day-nav-arrow-clean" id="btn-prev-day" onclick="navigateDay(-1)">◀</button>
+                    <select id="day-picker" class="day-picker-select-clean" onchange="changeTodayView(parseInt(this.value))">
+                    </select>
+                    <button class="day-nav-arrow-clean" id="btn-next-day" onclick="navigateDay(1)">▶</button>
+                </div>
+                <div class="day-title-wrap" id="day-title-text">
+                    加载中...
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 12px; margin-bottom: 10px; padding-left: 4px; font-size: 11px; color: var(--text-secondary);">
+                <span><span style="color:var(--accent-red);">●</span> 固定行程</span>
+                <span><span style="color:var(--accent-amber);">●</span> 餐饮食肆</span>
+                <span><span style="color:var(--accent-blue);">●</span> 自由活动</span>
+            </div>
+
+            <div class="card" id="today-timeline-card">
+            </div>
+        </div>
+
+        <div id="page-tickets" class="page-view">
+            <div class="card" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3);">
+                <div style="font-size: calc(var(--font-base) - 2px); color: var(--text-secondary); margin-bottom: 4px;">👤 当前成员身份选择：</div>
+                <select id="user-select-dropdown" onchange="selectUser(this.value)" style="width: 100%; background: #0b1120; border: 1px solid var(--accent-amber); color: #fff; padding: 8px 12px; border-radius: 10px; font-size: var(--font-title); font-weight: bold;">
+                    <option value="">-- 请选择您的名字 (成员身份) --</option>
+                    <option value="Tan Thiam Hock">Tan Thiam Hock</option>
+                    <option value="Leiw Kam Seam">Leiw Kam Seam</option>
+                    <option value="Tan Mei Chyi">Tan Mei Chyi</option>
+                    <option value="Tan Ying Kuan">Tan Ying Kuan</option>
+                    <option value="Tan Ying Hong">Tan Ying Hong</option>
+                    <option value="Tan Jing Yee">Tan Jing Yee</option>
+                    <option value="Chong Chee Yean">Chong Chee Yean</option>
+                    <option value="Cheah Thean Keat">Cheah Thean Keat</option>
+                    <option value="Loo Lih Yong">Loo Lih Yong</option>
+                </select>
+                <p style="font-size: 11px; color: var(--accent-amber); margin-top: 6px;">设置后将自动记住，再次打开网页无需重新挑选。</p>
+            </div>
+
+            <div class="card-title">🎫 预购/预约景点门票列表</div>
+            <div id="ticket-spots-list">
+            </div>
+        </div>
+
+        <div id="page-itinerary-all" class="page-view">
+            <div class="card" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); margin-bottom: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-size: var(--font-title); font-weight: bold; color: #34d399;">🔄 Google Sheet 实时同步</div>
+                        <div id="sync-status-text" style="font-size: 11px; color: var(--text-secondary); margin-top: 2px;">上次同步：从未同步</div>
+                    </div>
+                    <button onclick="syncTripDataFromSheet(true)" style="background: #10b981; border: none; color: #fff; font-weight: bold; padding: 6px 12px; border-radius: 10px; font-size: 12px; cursor: pointer;">立即刷新</button>
+                </div>
+            </div>
+
+            <div class="card-title">🗓️ 12天行程总览</div>
+            <div id="all-days-container"></div>
+        </div>
+
+        <div id="page-rate" class="page-view">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title" style="margin:0;">💱 实时汇率双向计算</span>
+                    <span style="font-size: calc(var(--font-base) - 2px); color: var(--accent-green); font-weight: bold;">1 MYR ≈ 1.55 RMB</span>
+                </div>
+                <div class="calc-input-group">
+                    <div class="calc-box" style="border-color: rgba(245, 158, 11, 0.4);">
+                        <label>🇨🇳 人民币 (RMB 块钱)</label>
+                        <div class="calc-input-row">
+                            <span class="calc-symbol" style="color:#f59e0b;">￥</span>
+                            <input type="number" id="calc-rmb" class="rmb-input" value="155" oninput="convertCurrency('rmb')" placeholder="0.00">
+                        </div>
+                    </div>
+                    <div class="calc-box">
+                        <label>🇲🇾 马币 (MYR 令吉)</label>
+                        <div class="calc-input-row">
+                            <span class="calc-symbol" style="color:#38bdf8;">RM</span>
+                            <input type="number" id="calc-myr" value="100" oninput="convertCurrency('myr')" placeholder="0.00">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">📊 常用消费速查表 (RMB ➔ MYR)</div>
+                <table class="rate-table">
+                    <thead>
+                        <tr><th>人民币 (RMB)</th><th>折合马币 (MYR)</th><th>常见场景参考</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><b>￥10 元</b></td><td>RM 6.45</td><td>地铁单程票 / 矿泉水</td></tr>
+                        <tr><td><b>￥20 元</b></td><td>RM 12.90</td><td>煎饼果子 / 奶茶</td></tr>
+                        <tr><td><b>￥50 元</b></td><td>RM 32.25</td><td>出租车起步 / 快捷简餐</td></tr>
+                        <tr><td><b>￥100 元</b></td><td>RM 64.52</td><td>特色胡同小吃人均</td></tr>
+                        <tr><td><b>￥200 元</b></td><td>RM 129.03</td><td>四季民福烤鸭人均</td></tr>
+                        <tr><td><b>￥500 元</b></td><td>RM 322.58</td><td>一日打车/包车平摊</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="page-flights" class="page-view">
+            <div class="card" onclick="openFlightDriveLink('outbound')" style="cursor: pointer; transition: transform 0.2s;" onmousedown="this.style.transform='scale(0.98)'" onmouseup="this.style.transform='scale(1)'">
+                <div class="card-header">
+                    <span class="card-title" style="margin:0;">✈️️ 去程航班 (KLIA2 ➔ 北京大兴)</span>
+                    <span class="badge badge-amber">10/19 傍晚</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr auto 1fr; text-align: center; align-items: center; padding: 10px 0;">
+                    <div>
+                        <div style="font-size: var(--font-head); font-weight: bold;">KLIA 2</div>
+                        <div style="font-size: calc(var(--font-base) - 2px); color: var(--text-secondary);">吉隆坡</div>
+                        <div style="font-size: var(--font-title); font-weight: bold; color: var(--accent-amber); margin-top: 4px;">18:50</div>
+                    </div>
+                    <div>
+                        <div style="font-size: calc(var(--font-base) - 3px); color: var(--text-secondary);">6小时 15分</div>
+                        <div style="font-size: 16px;">✈️</div>
+                        <div style="font-size: calc(var(--font-base) - 3px); color: var(--accent-green);">亚航 D7 342</div>
+                    </div>
+                    <div>
+                        <div style="font-size: var(--font-head); font-weight: bold;">PKX</div>
+                        <div style="font-size: calc(var(--font-base) - 2px); color: var(--text-secondary);">北京大兴</div>
+                        <div style="font-size: var(--font-title); font-weight: bold; color: var(--accent-amber); margin-top: 4px;">01:05 <span style="font-size: 10px; color: var(--accent-red);">+1天</span></div>
+                    </div>
+                </div>
+                <div style="margin-top: 8px; text-align: center; font-size: calc(var(--font-base) - 1px); color: var(--accent-blue); font-weight: bold; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 8px;">
+                    📂 点击调取【去程】电子机票 (Google Drive) ➔
+                </div>
+            </div>
+
+            <div class="card" onclick="openFlightDriveLink('inbound')" style="cursor: pointer; transition: transform 0.2s;" onmousedown="this.style.transform='scale(0.98)'" onmouseup="this.style.transform='scale(1)'">
+                <div class="card-header">
+                    <span class="card-title" style="margin:0;">✈️ 回程航班 (北京大兴 ➔ KLIA2)</span>
+                    <span class="badge badge-amber">10/30 凌晨</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr auto 1fr; text-align: center; align-items: center; padding: 10px 0;">
+                    <div>
+                        <div style="font-size: var(--font-head); font-weight: bold;">PKX</div>
+                        <div style="font-size: calc(var(--font-base) - 2px); color: var(--text-secondary);">北京大兴</div>
+                        <div style="font-size: var(--font-title); font-weight: bold; color: var(--accent-amber); margin-top: 4px;">02:30</div>
+                    </div>
+                    <div>
+                        <div style="font-size: calc(var(--font-base) - 3px); color: var(--text-secondary);">6小时 00分</div>
+                        <div style="font-size: 16px;">✈️</div>
+                        <div style="font-size: calc(var(--font-base) - 3px); color: var(--accent-green);">亚航回程</div>
+                    </div>
+                    <div>
+                        <div style="font-size: var(--font-head); font-weight: bold;">KLIA 2</div>
+                        <div style="font-size: calc(var(--font-base) - 2px); color: var(--text-secondary);">吉隆坡</div>
+                        <div style="font-size: var(--font-title); font-weight: bold; color: var(--accent-amber); margin-top: 4px;">06:30</div>
+                    </div>
+                </div>
+                <div style="margin-top: 8px; text-align: center; font-size: calc(var(--font-base) - 1px); color: var(--accent-blue); font-weight: bold; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 8px;">
+                    📂 点击调取【回程】电子机票 (Google Drive) ➔
+                </div>
+            </div>
+        </div>
+
+        <div id="page-hotels" class="page-view">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title" style="margin:0;">🏨 太姥山国际商务酒店</span>
+                    <span class="badge badge-red">10/19 - 10/25 (6晚)</span>
+                </div>
+                <p style="font-size: var(--font-base); color: #e2e8f0;">📍 地址：北京市东城区核心地段</p>
+                <a class="btn-link" style="background: #0284c7; font-size:var(--font-base); color:#fff; display:block; text-align:center; padding:8px; border-radius:10px; text-decoration:none; margin-top:8px;" href="https://uri.amap.com/marker?name=太姥山国际商务酒店" target="_blank">🗺️ 高德地图导航</a>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title" style="margin:0;">🏡 常来顺农家乐民宿</span>
+                    <span class="badge badge-amber">10/25 - 10/29 (4晚)</span>
+                </div>
+                <p style="font-size: var(--font-base); color: #e2e8f0;">📍 地址：北京市怀柔区 / 慕田峪长城周边</p>
+                <a class="btn-link" style="background: #0284c7; font-size:var(--font-base); color:#fff; display:block; text-align:center; padding:8px; border-radius:10px; text-decoration:none; margin-top:8px;" href="https://uri.amap.com/marker?name=常来顺农家乐民宿" target="_blank">🗺️ 高德地图导航</a>
+            </div>
+        </div>
+
+        <div id="page-checklist" class="page-view">
+            <div class="card-title">🎒 12天行前准备清单 (含 Day 0 - Day 11)</div>
+            <p style="font-size: 11px; color: var(--text-secondary); margin-bottom: 12px;">勾选后会自动保存至手机本地，并实时完成标注。</p>
+            <div id="full-checklist-container">
+            </div>
+        </div>
+
+        <div id="page-info" class="page-view">
+            <div class="card">
+                <div class="card-title">🚨 紧急求助电话</div>
+                <p style="font-size: var(--font-base);">• 报警: <b>110</b> | 医疗急救: <b>120</b></p>
+                <p style="font-size: var(--font-base);">• 大使馆: <b>+86 10 6532 2531</b></p>
+            </div>
+        </div>
+    </main>
+
+    <nav id="app-nav" class="bottom-nav" style="display: none;">
+        <button class="nav-item" onclick="showPage('home', this)">
+            <span class="nav-item-icon">🏠</span>
+            <span>首页</span>
+        </button>
+        <button class="nav-item" onclick="goToCurrentOrNearestDay(this)">
+            <span class="nav-item-icon">📍</span>
+            <span>当日</span>
+        </button>
+        <button class="nav-item" onclick="showPage('tickets', this)">
+            <span class="nav-item-icon">🎫</span>
+            <span>门票</span>
+        </button>
+        <button class="nav-item" onclick="showPage('itinerary-all', this)">
+            <span class="nav-item-icon">🗓️</span>
+            <span>总览</span>
+        </button>
+        <button class="nav-item" onclick="showPage('rate', this)">
+            <span class="nav-item-icon">💱</span>
+            <span>汇率</span>
+        </button>
+    </nav>
+</div>
+
+<div class="modal-overlay" id="qrModal">
+    <div class="modal-body">
+        <button class="modal-close" onclick="closeModal('qrModal')">✕</button>
+        <h3 id="modal-spot-name" style="font-size: var(--font-head); font-weight: bold; color: var(--accent-amber); margin-bottom: 4px;">景点门票</h3>
+        <p id="modal-user-name" style="font-size: var(--font-base); font-weight: bold; color: #fff;"></p>
+        
+        <div class="qr-placeholder-box">
+            <p style="font-size: 11px; color: #64748b;">入园预约二维码 / 护照刷证凭证</p>
+            <div style="font-size: 50px; margin: 10px 0;">📱</div>
+            <p id="modal-qr-code-id" style="font-size: 13px; font-weight: bold; color: #000; font-family: monospace;"></p>
+        </div>
+        
+        <p id="modal-spot-desc" style="font-size: calc(var(--font-base) - 2px); color: var(--text-secondary); line-height: 1.4;"></p>
+    </div>
+</div>
+
+<div class="modal-overlay" id="prepModal">
+    <div class="modal-body">
+        <button class="modal-close" onclick="closeModal('prepModal')">✕</button>
+        <h3 id="prep-modal-title" style="font-size: var(--font-head); font-weight: bold; color: var(--accent-amber); margin-bottom: 10px;">📋 当日出门注意事项</h3>
+        <div id="prep-modal-items-container">
+        </div>
+    </div>
+</div>
+
+<script>
+    const FLIGHT_OUTBOUND_DRIVE_URL = "https://drive.google.com/drive/folders/1liVbhUrwJNwx-5FjFJfvBY-pCKxvx3Qj?usp=drive_link";
+    const FLIGHT_INBOUND_DRIVE_URL = "https://drive.google.com/drive/folders/1MBoWrtwHhnq1qpm1Amy03GH3HkclD8FP?usp=drive_link";
+    
+    const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbzpGtFrLKFtMV0MFMuV_3ezMcnB18TK2c92zu_qud5bnMnthn9XZo5UpFlwSxdFuuWY3g/exec";
+
+    function openFlightDriveLink(direction) {
+        if (direction === 'inbound') {
+            window.open(FLIGHT_INBOUND_DRIVE_URL, '_blank');
+        } else {
+            window.open(FLIGHT_OUTBOUND_DRIVE_URL, '_blank');
+        }
+    }
+
+    const defaultPrepData = {
+        "10/19": ["随身携带护照原件（登机/入境备查）", "检查托运行李无充电宝/违禁品，随身携带充电宝", "开通手机国际漫游或确认中国 eSIM 可用", "准备好吉隆坡-北京航班电子机票备用"],
+        "10/20": ["务必随身携带护照原件（进入天安门须核验护照）", "穿舒适步行鞋，准备防风保暖外套", "严格禁带打火机、液体及违禁物品", "确认手机支付宝/微信已绑定扣款方式"],
+        "10/21": ["带齐护照原件（故宫刷护照入园）", "准备好充电宝（故宫内徒步时间长）", "建议带少量干粮或水（安检通过后补充体力）"],
+        "10/22": ["准备租用共享单车或电瓶车（方便胡同穿梭）", "穿轻便保暖鞋服，准备相机或手机拍照", "带齐护照与随身零钱"],
+        "10/23": ["携带护照原件（天坛与恭王府预约核验）", "穿舒适耐磨步行鞋（天坛园区广阔）", "准备防风外套（夜间什刹海湖边风大）"],
+        "10/24": ["带齐护照原件（颐和园刷护照入园）", "沙河大集体验建议备好少量人民币现金", "准备保暖外套与防晒帽子"],
+        "10/25": ["检查房间确保护照、充电器、随身物品无遗漏", "准备好前往怀柔郊区的乘车防晕车药", "怀柔山区夜晚气温较低，准备厚外套"],
+        "10/26": ["必须携带护照原件（长城刷护照登城）", "长城风大温度低，准备羽绒服/厚风衣与帽子", "穿抓地力强的运动鞋，带小瓶保温水"],
+        "10/27": ["带齐护照原件（水镇核验门票）", "准备保暖便鞋（水镇均为石板路，步行较多）", "准备保暖外套（长城脚下水镇夜间寒冷）"],
+        "10/28": ["收拾完民宿所有行李并清点无误", "随身携带护照与贵重物品", "准备好返回市区逛街购物的便服"],
+        "10/29": ["打包托运行李，核对护照、机票行程单及个人物品", "确认随身行李无违禁刀具与超过100ml液体", "预留充足时间乘专车前往大兴机场"],
+        "10/30": ["准备好大兴-吉隆坡回程机票", "核对所有随身贵重物品与护照"]
+    };
+
+    const defaultTripData = [
+        { "date": "10/19", "day": "Day 0", "week": "Mon", "title": "启程", "hotel": "太姥山国际商务酒店", "transport": "Grab / 亚航", "timeline": [{ "time": "3:00 PM (下午)", "text": "Setapak 出发前往 KLIA2", "sub": "搭 Grab 前往机场 | 集合地点: KLIA2 航站楼", "type": "fixed", "transitPill": "Grab 45分钟", "hasPrep": true }, { "time": "6:50 PM (傍晚)", "text": "飞往北京大兴 (D7 342)", "sub": "飞行 6小时15分 | 大兴国际机场", "type": "fixed", "transitPill": "亚航 6小时15分", "isFlight": true, "flightDir": "outbound" }, { "time": "1:05 AM (凌晨)", "text": "抵达大兴机场前往酒店", "sub": "办理入境，打车前往酒店", "type": "fixed", "transitPill": "打车 50分钟" }, { "time": "3:00 AM (凌晨)", "text": "太姥山酒店 Check-in / 休息", "sub": "太姥山国际商务酒店", "type": "fixed", "mapUrl": "https://uri.amap.com/marker?name=太姥山国际商务酒店" }] },
+        { "date": "10/20", "day": "Day 1", "week": "Tue", "title": "天安门 & 王府井", "hotel": "太姥山国际商务酒店", "transport": "地铁 / 电瓶车", "timeline": [{ "time": "8:30 AM (早上)", "text": "太姥山酒店准备出门出发", "sub": "开启北京第一天行程", "type": "fixed", "transitPill": "步行 10分钟", "mapUrl": "https://uri.amap.com/marker?name=太姥山国际商务酒店", "hasPrep": true }, { "time": "9:00 AM (早上)", "text": "早餐：增盛魁小吃", "sub": "特色传统老北京小吃", "type": "meal", "mapUrl": "https://uri.amap.com/marker?name=增盛魁小吃" }] }
+    ];
+
+    let tripData = JSON.parse(localStorage.getItem('beijing_trip_data')) || defaultTripData;
+    let dailyPrepData = JSON.parse(localStorage.getItem('beijing_checklist_data')) || defaultPrepData;
+
+    const ticketSpotsData = [
+        { name: "天安门广场", desc: "免费，但必须提前在微信公众号实名预约。入园须出示护照原件。" },
+        { name: "故宫博物院", desc: "门票60元（老人半价30元）。须提前7天晚20:00抢票，凭护照原件刷证入园。" },
+        { name: "慕田峪长城", desc: "门票40元+摆渡车15元+双程缆车140元。凭护照原件或二维码检票。" },
+        { name: "天坛公园", desc: "联票34元（含祈年殿与皇穹宇）。须提前预约，凭护照刷证入园。" },
+        { name: "颐和园", desc: "联票60元（含德和园、佛香阁）。须提前公众号预约，凭护照刷证入园。" },
+        { name: "恭王府", desc: "门票40元。须提前预约，凭护照原件刷证入园。" },
+        { name: "古北水镇", desc: "门票140元。凭预约二维码或护照刷证入园。" }
+    ];
+
+    let currentDayIndex = 0;
+    let selectedUser = localStorage.getItem('beijing_selected_user') || '';
+
+    const fontClasses = ['font-md', 'font-lg', 'font-xl'];
+    const fontLabels = ['标准', '大字', '特大字'];
+    let currentFontIndex = parseInt(localStorage.getItem('beijing_font_idx') || '0');
+
+    async function syncTripDataFromSheet(isManual = false) {
+        const syncStatusText = document.getElementById('sync-status-text');
+
+        if (!navigator.onLine) {
+            if (isManual) alert("📱 当前处于离线状态，将加载上一次成功保存的行程与清单。");
+            return;
+        }
+
+        if (isManual && syncStatusText) {
+            syncStatusText.innerText = "正在从 Google Sheet 拉取中...";
+        }
+
+        try {
+            const response = await fetch(`${GOOGLE_SHEET_API_URL}?t=${Date.now()}`);
+            const result = await response.json();
+
+            if (result.status === "success" && Array.isArray(result.data) && result.data.length > 0) {
+                tripData = result.data;
+                if (result.checklistData && Object.keys(result.checklistData).length > 0) {
+                    dailyPrepData = result.checklistData;
+                    localStorage.setItem('beijing_checklist_data', JSON.stringify(dailyPrepData));
+                }
+
+                const nowTimeStr = new Date().toLocaleString('zh-CN');
+                localStorage.setItem('beijing_trip_data', JSON.stringify(tripData));
+                localStorage.setItem('beijing_trip_last_sync', nowTimeStr);
+
+                renderAllDays();
+                populateDayPicker();
+                changeTodayView(currentDayIndex);
+                updateHomeTodayCard();
+                renderFullChecklist();
+
+                if (syncStatusText) {
+                    syncStatusText.innerText = `上次同步：${nowTimeStr}`;
+                }
+
+                if (isManual) alert("✅ 已成功同步行程与行前清单数据！");
+            } else {
+                if (isManual) alert("⚠️ 收到表格数据，但格式有误，请检查 Apps Script 部署状态。");
+            }
+        } catch (err) {
+            console.error("同步表格发生错误:", err);
+            if (isManual) alert("❌ 同步失败，请确认已在 Apps Script 中部署‘新建版本’。");
+        }
+    }
+
+    function updateSyncStatusDisplay() {
+        const lastSync = localStorage.getItem('beijing_trip_last_sync');
+        const syncStatusText = document.getElementById('sync-status-text');
+        if (syncStatusText) {
+            syncStatusText.innerText = lastSync ? `上次同步：${lastSync}` : "上次同步：从未同步（使用默认数据）";
+        }
+    }
+
+    function applyFontIndex(idx) {
+        if (idx < 0) idx = 0;
+        if (idx > 2) idx = 2;
+        currentFontIndex = idx;
+        document.body.className = fontClasses[currentFontIndex];
+        
+        const homeFontText = document.getElementById('font-level-text-home');
+        const subFontText = document.getElementById('font-level-text-sub');
+        if (homeFontText) homeFontText.innerText = fontLabels[currentFontIndex];
+        if (subFontText) subFontText.innerText = fontLabels[currentFontIndex];
+        
+        localStorage.setItem('beijing_font_idx', currentFontIndex.toString());
+    }
+
+    function changeFontSize(dir) {
+        applyFontIndex(currentFontIndex + dir);
+    }
+
+    function showPage(pageId, navBtn) {
+        document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+        const target = document.getElementById('page-' + pageId);
+        if (target) target.classList.add('active');
+
+        const appHeader = document.getElementById('app-header');
+        const appNav = document.getElementById('app-nav');
+        const mainContainer = document.getElementById('main-container');
+
+        if (pageId === 'home') {
+            if (appHeader) appHeader.style.display = 'none';
+            if (appNav) appNav.style.display = 'none';
+            if (mainContainer) mainContainer.classList.add('is-home');
+        } else {
+            if (appHeader) appHeader.style.display = 'flex';
+            if (appNav) appNav.style.display = 'flex';
+            if (mainContainer) mainContainer.classList.remove('is-home');
+
+            if (navBtn) {
+                document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+                navBtn.classList.add('active');
+            }
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function selectUser(userName) {
+        selectedUser = userName;
+        localStorage.setItem('beijing_selected_user', userName);
+        document.getElementById('user-select-dropdown').value = userName;
+    }
+
+    function openSpotQR(spotName, spotDesc) {
+        if (!selectedUser) {
+            alert('请先选择您的名字（成员身份），以便加载属于您的门票二维码！');
+            showPage('tickets');
+            return;
+        }
+        
+        document.getElementById('modal-spot-name').innerText = '🎫 ' + spotName;
+        document.getElementById('modal-user-name').innerText = '👤 专属持票人: ' + selectedUser;
+        document.getElementById('modal-spot-desc').innerText = spotDesc || '入园须携带护照原件备查。';
+        
+        const qrHash = 'BJ2026-' + spotName.substring(0, 2) + '-' + Math.abs(hashCode(selectedUser + spotName));
+        document.getElementById('modal-qr-code-id').innerText = qrHash;
+        
+        document.getElementById('qrModal').classList.add('active');
+    }
+
+    function hashCode(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            hash = (hash << 5) - hash + str.charCodeAt(i);
+            hash |= 0;
+        }
+        return hash;
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.remove('active');
+    }
+
+    function openPrepModal(dateKey, dayTitle) {
+        const modal = document.getElementById('prepModal');
+        document.getElementById('prep-modal-title').innerText = `📋 ${dayTitle} 出门注意事项`;
+        
+        const container = document.getElementById('prep-modal-items-container');
+        const items = dailyPrepData[dateKey] || [];
+        
+        let html = '';
+        if (items.length === 0) {
+            html = '<p style="color:var(--text-secondary); font-size:13px;">当日无特殊注意事项。</p>';
+        } else {
+            items.forEach((itemText, idx) => {
+                const checkId = `prep_${dateKey}_${idx}`;
+                const isChecked = isPrepChecked(checkId);
+                html += `
+                    <div class="check-item">
+                        <input type="checkbox" id="${checkId}" ${isChecked ? 'checked' : ''} onchange="togglePrepCheck('${checkId}')">
+                        <label for="${checkId}" class="check-label">${itemText}</label>
+                    </div>
+                `;
+            });
+        }
+        container.innerHTML = html;
+        modal.classList.add('active');
+    }
+
+    function isPrepChecked(id) {
+        const saved = JSON.parse(localStorage.getItem('beijing_prep_checks') || '{}');
+        return !!saved[id];
+    }
+
+    function togglePrepCheck(id) {
+        const saved = JSON.parse(localStorage.getItem('beijing_prep_checks') || '{}');
+        const el = document.getElementById(id);
+        if (el) {
+            saved[id] = el.checked;
+        } else {
+            saved[id] = !saved[id];
+        }
+        localStorage.setItem('beijing_prep_checks', JSON.stringify(saved));
+        renderFullChecklist();
+    }
+
+    function renderFullChecklist() {
+        const container = document.getElementById('full-checklist-container');
+        let html = '';
+
+        tripData.forEach(day => {
+            const items = dailyPrepData[day.date] || [];
+            if (items.length > 0) {
+                html += `
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title" style="margin:0; color:var(--accent-amber);">${day.day} (${day.date})</span>
+                            <span style="font-size:12px; color:var(--text-secondary);">${day.title}</span>
+                        </div>
+                `;
+                items.forEach((itemText, idx) => {
+                    const checkId = `prep_${day.date}_${idx}`;
+                    const isChecked = isPrepChecked(checkId);
+                    html += `
+                        <div class="check-item">
+                            <input type="checkbox" id="full_${checkId}" ${isChecked ? 'checked' : ''} onchange="togglePrepCheck('${checkId}')">
+                            <label for="full_${checkId}" class="check-label">${itemText}</label>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            }
+        });
+        container.innerHTML = html;
+    }
+
+    function renderTicketSpots() {
+        const container = document.getElementById('ticket-spots-list');
+        let html = '';
+        ticketSpotsData.forEach(spot => {
+            html += `
+                <div class="ticket-spot-card" onclick="openSpotQR('${spot.name}', '${spot.desc}')">
+                    <div style="font-size: var(--font-title); font-weight: bold; color: #fff;">🏛️ ${spot.name}</div>
+                    <span style="font-size: 18px; color: var(--accent-amber);">📲</span>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+
+    function populateDayPicker() {
+        const picker = document.getElementById('day-picker');
+        let html = '';
+        tripData.forEach((d, i) => {
+            html += `<option value="${i}">${d.day} (${d.date})</option>`;
+        });
+        picker.innerHTML = html;
+    }
+
+    function navigateDay(direction) {
+        const newIndex = currentDayIndex + direction;
+        if (newIndex >= 0 && newIndex < tripData.length) {
+            changeTodayView(newIndex);
+        }
+    }
+
+    function changeTodayView(index) {
+        if (!tripData || tripData.length === 0) return;
+        currentDayIndex = index;
+        const day = tripData[index];
+        
+        const dayPicker = document.getElementById('day-picker');
+        if (dayPicker) dayPicker.value = index;
+
+        document.getElementById('btn-prev-day').disabled = (index === 0);
+        document.getElementById('btn-next-day').disabled = (index === tripData.length - 1);
+
+        document.getElementById('day-title-text').innerText = day.title;
+
+        const container = document.getElementById('today-timeline-card');
+        let timelineHtml = '<div class="timeline">';
+
+        if (day.timeline && day.timeline.length > 0) {
+            day.timeline.forEach((item, idx) => {
+                let dotClass = 'dot-fixed';
+                let freeTag = '';
+                let timeClass = 'timeline-time';
+
+                if (item.type === 'meal') {
+                    dotClass = 'dot-meal';
+                } else if (item.type === 'free') {
+                    dotClass = 'dot-free';
+                    timeClass = 'timeline-time-free';
+                    freeTag = `<span class="badge badge-free">自由活动</span>`;
+                }
+
+                let subtleMapBtn = '';
+                if (item.mapUrl) {
+                    subtleMapBtn = `<a class="inline-subtle-map" href="${item.mapUrl}" target="_blank">📍地图</a>`;
+                }
+
+                let actionBtns = '';
+                if (item.isTicket) {
+                    const sName = item.spotName || item.text;
+                    actionBtns += `<button class="action-tag-btn btn-ticket" onclick="openSpotQR('${sName}', '凭护照原件与此凭证入园。')">🎫 门票</button>`;
+                } else if (item.isFlight) {
+                    const flightDirection = item.flightDir || 'outbound';
+                    actionBtns += `<button class="action-tag-btn btn-flight" onclick="openFlightDriveLink('${flightDirection}')">✈️ 机票</button>`;
+                }
+
+                if (item.hasPrep) {
+                    actionBtns += `<button class="action-tag-btn btn-prep" onclick="openPrepModal('${day.date}', '${day.day}')">📋 当日注意事项</button>`;
+                }
+
+                let freeDashedBox = '';
+                if (item.type === 'free' && item.freeOptions) {
+                    let listItemsHtml = '';
+                    item.freeOptions.forEach(opt => {
+                        let mapLink = opt.mapUrl ? `<a class="inline-subtle-map" href="${opt.mapUrl}" target="_blank">📍地图</a>` : '';
+                        listItemsHtml += `<li><span>${opt.label}</span>${mapLink}</li>`;
+                    });
+
+                    freeDashedBox = `
+                        <div class="free-flexible-box">
+                            <ul>${listItemsHtml}</ul>
+                        </div>
+                    `;
+                }
+
+                let meetingOutsideBox = '';
+                if (item.meetingInfo && item.meetingInfo.label) {
+                    let mapLink = item.meetingInfo.mapUrl ? `<a class="inline-subtle-map" style="background:var(--accent-red); color:#fff;" href="${item.meetingInfo.mapUrl}" target="_blank">📍地图</a>` : '';
+                    meetingOutsideBox = `
+                        <div class="meeting-box-outside">
+                            <span class="meeting-text">⚠️ 集合提醒：${item.meetingInfo.label}</span>
+                            ${mapLink}
+                        </div>
+                    `;
+                }
+
+                let connectorHtml = '';
+                if (item.transitPill && idx < day.timeline.length - 1) {
+                    connectorHtml = `
+                        <div class="transit-connector">
+                            <span class="transit-pill">${item.transitPill}</span>
+                        </div>
+                    `;
+                }
+
+                timelineHtml += `
+                    <div class="timeline-item">
+                        <div class="timeline-dot-wrapper">
+                            <div class="timeline-dot ${dotClass}"></div>
+                            <div class="${timeClass}">${item.time} ${freeTag}</div>
+                        </div>
+                        <div class="timeline-title">
+                            <span>${item.text}</span>
+                            ${subtleMapBtn}
+                        </div>
+                        ${item.sub ? `<div class="timeline-sub">${item.sub}</div>` : ''}
+                        ${freeDashedBox}
+                        ${meetingOutsideBox}
+                        <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:2px;">
+                            ${actionBtns}
+                        </div>
+                    </div>
+                    ${connectorHtml}
+                `;
+            });
+        }
+
+        timelineHtml += '</div>';
+        container.innerHTML = timelineHtml;
+    }
+
+    function renderAllDays() {
+        const container = document.getElementById('all-days-container');
+        let html = '';
+        tripData.forEach((day, index) => {
+            html += `
+                <div class="card" onclick="selectDayFromOverview(${index})" style="cursor:pointer;">
+                    <div class="card-header">
+                        <span class="card-title" style="margin:0; font-size:calc(var(--font-base) - 1px); color:var(--accent-amber);">${day.day} (${day.date} ${day.week})</span>
+                        <span class="badge badge-blue">${day.hotel}</span>
+                    </div>
+                    <div style="font-size: var(--font-title); font-weight: bold; color: #fff;">${day.title}</div>
+                    <div style="font-size: calc(var(--font-base) - 2px); color: var(--text-secondary); margin-top: 4px;">交通: ${day.transport} | 点击进入详情 ➔</div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+
+    function selectDayFromOverview(index) {
+        changeTodayView(index);
+        showPage('itinerary-today');
+    }
+
+    function convertCurrency(type) {
+        const myr = document.getElementById('calc-myr');
+        const rmb = document.getElementById('calc-rmb');
+        const rate = 1.55;
+        if (type === 'myr') {
+            rmb.value = (parseFloat(myr.value || 0) * rate).toFixed(2);
+        } else {
+            myr.value = (parseFloat(rmb.value || 0) / rate).toFixed(2);
+        }
+    }
+
+    function getNearestTripIndex() {
+        const now = new Date();
+        const currentMonth = now.getMonth() + 1;
+        const currentDate = now.getDate();
+        
+        let targetIndex = 0;
+        
+        if (currentMonth === 10) {
+            if (currentDate <= 19) {
+                targetIndex = 0;
+            } else if (currentDate >= 30) {
+                targetIndex = tripData.length - 1;
+            } else {
+                const idx = tripData.findIndex(d => d.date === `10/${currentDate}`);
+                if (idx !== -1) targetIndex = idx;
+            }
+        } else if (currentMonth > 10) {
+            targetIndex = tripData.length - 1;
+        } else {
+            targetIndex = 0;
+        }
+        return targetIndex;
+    }
+
+    function updateHomeTodayCard() {
+        if (!tripData || tripData.length === 0) return;
+        const matchedIndex = getNearestTripIndex();
+        const todayData = tripData[matchedIndex];
+        
+        const now = new Date();
+        const isExactMatch = (now.getMonth() + 1 === 10) && (now.getDate() >= 19 && now.getDate() <= 30);
+        
+        document.getElementById('home-today-card-title').innerText = isExactMatch ? '🌤️ 今日行程快览' : '🌤️ 推荐/即将来临行程';
+        document.getElementById('home-date-badge').innerText = `${todayData.day} (${todayData.date})`;
+        document.getElementById('home-today-summary').innerHTML = `
+            <p style="font-weight: bold; color: #fff; font-size:var(--font-title);">${todayData.title}</p>
+            <p style="font-size: calc(var(--font-base) - 1px); color: var(--text-secondary); margin-top: 2px;">🏨 住宿: ${todayData.hotel}</p>
+        `;
+    }
+
+    function goToCurrentOrNearestDay(navBtn) {
+        const matchedIndex = getNearestTripIndex();
+        changeTodayView(matchedIndex);
+        showPage('itinerary-today', navBtn);
+    }
+
+    window.addEventListener('scroll', function() {
+        const stickyHeader = document.getElementById('sticky-day-header');
+        if (!stickyHeader) return;
+        
+        if (window.scrollY > 30) {
+            stickyHeader.classList.add('is-scrolled');
+        } else {
+            stickyHeader.classList.remove('is-scrolled');
+        }
+    });
+
+    window.onload = function() {
+        applyFontIndex(currentFontIndex);
+        renderTicketSpots();
+        renderAllDays();
+        populateDayPicker();
+        updateHomeTodayCard();
+        renderFullChecklist();
+        updateSyncStatusDisplay();
+
+        if (selectedUser) {
+            document.getElementById('user-select-dropdown').value = selectedUser;
+        }
+
+        showPage('home');
+
+        syncTripDataFromSheet(false);
+    };
+</script>
+</body>
+</html>
