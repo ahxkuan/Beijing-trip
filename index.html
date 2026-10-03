@@ -161,7 +161,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
         }
         .day-switcher-row { display: flex; align-items: center; justify-content: space-between; }
-        .day-nav-arrow-clean { background: none; border: none; color: var(--accent-amber); font-weight: bold; font-size: 18px; cursor: pointer; padding: 4px 12px; }
+        .day-nav-arrow-clean { background: none; border: none; color: var(--accent-amber); font-weight: bold; font-size: 20px; cursor: pointer; padding: 4px 14px; }
         .day-nav-arrow-clean:disabled { opacity: 0.2; cursor: not-allowed; }
         .day-picker-select-clean { background: none; border: none; color: #fff; font-size: var(--font-title); font-weight: bold; text-align: center; text-align-last: center; outline: none; cursor: pointer; padding: 2px 0; max-width: 260px; }
 
@@ -373,10 +373,10 @@
         <div id="page-itinerary-today" class="page-view">
             <div class="sticky-day-header" id="sticky-day-header">
                 <div class="day-switcher-row">
-                    <button class="day-nav-arrow-clean" id="btn-prev-day" onclick="navigateDay(-1)">◀ 上一天</button>
+                    <button class="day-nav-arrow-clean" id="btn-prev-day" onclick="navigateDay(-1)">◀</button>
                     <select id="day-picker" class="day-picker-select-clean" onchange="changeTodayView(parseInt(this.value))">
                     </select>
-                    <button class="day-nav-arrow-clean" id="btn-next-day" onclick="navigateDay(1)">下一天 ▶</button>
+                    <button class="day-nav-arrow-clean" id="btn-next-day" onclick="navigateDay(1)">▶</button>
                 </div>
             </div>
 
@@ -725,7 +725,6 @@
             return;
         }
 
-        // 仅筛选与当前选中成员匹配的门票
         const userTickets = [];
         Object.keys(driveTicketsData).forEach(key => {
             const tk = driveTicketsData[key];
@@ -749,7 +748,7 @@
             html += `
                 <div class="ticket-spot-card" onclick="openSpotQR('${spot.spotName}', '${spot.notes || '凭护照原件与此门票图档刷证入园。'}')">
                     <div>
-                        <div style="font-size: var(--font-title); font-weight: bold; color: #fff;">🏛️ ${spot.spotName}</div>
+                        <div style="font-size: var(--font-title); font-weight: bold; color: #fff;">🏛️️ ${spot.spotName}</div>
                         <div style="font-size: 11px; color: var(--accent-green); margin-top: 2px;">✅ 已在 Google Drive 匹配门票</div>
                     </div>
                     <span style="font-size: 18px; color: var(--accent-amber);">📲 查验</span>
@@ -770,10 +769,8 @@
         const matchedTicket = driveTicketsData[matchKey];
 
         if (matchedTicket && matchedTicket.imageUrl) {
-            // 匹配成功，直接在弹窗中放大预览
             openSpotQR(spotName, spotDesc);
         } else {
-            // 没有匹配到图档，优雅跳转到门票页面
             alert(`未在 Drive 中匹配到 ${selectedUser} 的 [${spotName}] 门票，正在为您跳转至门票列表页面...`);
             showPage('tickets');
         }
