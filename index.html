@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>北京之旅 2026 | 离线随身手册</title>
+    <title>北京之旅 2026 | 随身手册</title>
     <style>
         :root {
             --bg-main: #0b1120;
@@ -748,7 +748,7 @@
             html += `
                 <div class="ticket-spot-card" onclick="openSpotQR('${spot.spotName}', '${spot.notes || '凭护照原件与此门票图档刷证入园。'}')">
                     <div>
-                        <div style="font-size: var(--font-title); font-weight: bold; color: #fff;">🏛️️ ${spot.spotName}</div>
+                        <div style="font-size: var(--font-title); font-weight: bold; color: #fff;">🏛 ${spot.spotName}</div>
                         <div style="font-size: 11px; color: var(--accent-green); margin-top: 2px;">✅ 已在 Google Drive 匹配门票</div>
                     </div>
                     <span style="font-size: 18px; color: var(--accent-amber);">📲 查验</span>
@@ -988,7 +988,8 @@
         const picker = document.getElementById('day-picker');
         let html = '';
         tripData.forEach((d, i) => {
-            html += `<option value="${i}">${d.day} (${d.date}) · ${d.title}</option>`;
+            const weekStr = d.week ? ` ${d.week}` : '';
+            html += `<option value="${i}">${d.day} (${d.date})${weekStr}</option>`;
         });
         picker.innerHTML = html;
     }
