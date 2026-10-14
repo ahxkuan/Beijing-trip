@@ -27,29 +27,9 @@
         body.font-xl { --font-base: 20px; --font-title: 23px; --font-head: 26px; }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        html, body { 
-            width: 100%; 
-            overflow-x: hidden; 
-            background-color: #020617; 
-            color: var(--text-primary); 
-            line-height: 1.6; 
-            font-size: var(--font-base); 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            transition: font-size 0.2s ease; 
-        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: #020617; color: var(--text-primary); line-height: 1.6; font-size: var(--font-base); transition: font-size 0.2s ease; }
         
-        .app-container { 
-            width: 100%; 
-            max-width: 450px; 
-            margin: 0 auto; 
-            min-height: 100dvh; 
-            background-color: var(--bg-main); 
-            display: flex; 
-            flex-direction: column; 
-            position: relative; 
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); 
-            overflow-x: hidden; 
-        }
+        .app-container { max-width: 450px; margin: 0 auto; min-height: 100dvh; background-color: var(--bg-main); display: flex; flex-direction: column; position: relative; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); }
         
         header.subpage-header { 
             background: rgba(11, 17, 32, 0.95); 
@@ -63,7 +43,6 @@
             justify-content: space-between; 
             align-items: center; 
             height: 61px;
-            width: 100%;
         }
         .header-left { display: flex; align-items: center; gap: 10px; cursor: pointer; }
         .brand-icon { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #e11d48, #9f1239); color: #ffffff; font-weight: bold; font-size: 17px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(225, 29, 72, 0.35); flex-shrink: 0; }
@@ -76,10 +55,10 @@
         .font-btn:active { background: var(--bg-card-hover); }
         .font-indicator { font-size: 10px; color: var(--text-secondary); padding: 0 2px; }
 
-        main { flex: 1; padding: 14px; padding-bottom: 90px; width: 100%; overflow-x: hidden; }
+        main { flex: 1; padding: 14px; padding-bottom: 90px; }
         main.is-home { padding: 0; overflow: hidden; }
 
-        .page-view { display: none; width: 100%; }
+        .page-view { display: none; }
         .page-view.active { display: block; animation: fadeIn 0.25s ease-out; }
 
         @keyframes fadeIn {
@@ -87,7 +66,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 14px; margin-bottom: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.2); width: 100%; overflow: hidden; }
+        .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 14px; margin-bottom: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.2); }
         .card-title { font-size: var(--font-title); font-weight: 700; color: #f8fafc; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
         .card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-bottom: 10px; }
 
@@ -169,7 +148,6 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
         }
 
-        /* 修复后的吸顶工具栏：精确限制宽度不挤压变形 */
         .sticky-day-header {
             position: sticky;
             top: 61px;
@@ -178,19 +156,16 @@
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-color);
-            padding: 10px 8px;
-            margin: 0 0 12px 0;
-            border-radius: 12px;
+            padding: 10px 14px;
+            margin: -14px -14px 12px -14px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-            width: 100%;
         }
-        .day-switcher-row { display: flex; align-items: center; justify-content: space-between; width: 100%; }
-        .day-nav-arrow-clean { background: none; border: none; color: var(--accent-amber); font-weight: bold; font-size: 20px; cursor: pointer; padding: 4px 8px; flex-shrink: 0; }
+        .day-switcher-row { display: flex; align-items: center; justify-content: space-between; }
+        .day-nav-arrow-clean { background: none; border: none; color: var(--accent-amber); font-weight: bold; font-size: 20px; cursor: pointer; padding: 4px 14px; }
         .day-nav-arrow-clean:disabled { opacity: 0.2; cursor: not-allowed; }
-        .day-picker-select-clean { background: none; border: none; color: #fff; font-size: var(--font-title); font-weight: bold; text-align: center; text-align-last: center; outline: none; cursor: pointer; padding: 2px 0; flex: 1; max-width: 280px; }
+        .day-picker-select-clean { background: none; border: none; color: #fff; font-size: var(--font-title); font-weight: bold; text-align: center; text-align-last: center; outline: none; cursor: pointer; padding: 2px 0; max-width: 260px; }
 
-        /* 优化时间轴防溢出 */
-        .timeline { position: relative; padding-left: 18px; border-left: 2px solid var(--border-color); margin-left: 6px; margin-top: 10px; }
+        .timeline { position: relative; padding-left: 24px; border-left: 2px solid var(--border-color); margin-left: 10px; margin-top: 10px; }
         .timeline-item { position: relative; margin-bottom: 22px; }
         
         .timeline-dot-wrapper {
@@ -200,7 +175,7 @@
         }
         .timeline-dot { 
             position: absolute; 
-            left: -25px; 
+            left: -31px; 
             top: 50%;
             transform: translateY(-50%);
             width: 12px; 
@@ -215,15 +190,15 @@
 
         .timeline-time { font-size: calc(var(--font-base) - 1px); font-weight: bold; color: var(--accent-amber); display: flex; align-items: center; gap: 6px; line-height: 1.2; }
         .timeline-time-free { font-size: calc(var(--font-base) - 1px); font-weight: bold; color: var(--accent-blue); display: flex; align-items: center; gap: 6px; line-height: 1.2; }
-        .timeline-title { font-size: var(--font-title); font-weight: bold; color: #f8fafc; margin-top: 4px; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; word-break: break-word; }
-        .timeline-sub { font-size: calc(var(--font-base) - 1px); color: var(--text-secondary); margin-top: 2px; line-height: 1.5; word-break: break-word; }
+        .timeline-title { font-size: var(--font-title); font-weight: bold; color: #f8fafc; margin-top: 4px; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+        .timeline-sub { font-size: calc(var(--font-base) - 1px); color: var(--text-secondary); margin-top: 2px; line-height: 1.5; }
 
-        .transit-connector { position: relative; margin: 12px 0 12px -25px; z-index: 1; }
+        .transit-connector { position: relative; margin: 12px 0 12px -35px; z-index: 1; }
         .transit-pill { display: inline-flex; align-items: center; background: #0b1120; border: 1px solid var(--border-color); color: var(--text-secondary); font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
 
         .free-flexible-box { background: rgba(56, 189, 248, 0.05); border: 1.5px dashed rgba(56, 189, 248, 0.4); border-radius: 12px; padding: 8px 12px; margin-top: 6px; }
         .free-flexible-box ul { list-style-type: disc; padding-left: 18px; margin-top: 2px; }
-        .free-flexible-box li { font-size: calc(var(--font-base) - 1px); color: #e2e8f0; margin-bottom: 4px; line-height: 1.4; word-break: break-word; }
+        .free-flexible-box li { font-size: calc(var(--font-base) - 1px); color: #e2e8f0; margin-bottom: 4px; line-height: 1.4; }
         .free-flexible-box li:last-child { margin-bottom: 0; }
 
         .meeting-box-outside { background: rgba(239, 68, 68, 0.12); border: 1px dashed var(--accent-red); padding: 6px 10px; border-radius: 8px; margin-top: 8px; font-size: calc(var(--font-base) - 1px); font-weight: bold; color: #f87171; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
@@ -245,7 +220,7 @@
         .check-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px dashed rgba(255, 255, 255, 0.08); cursor: pointer; }
         .check-item:last-child { border-bottom: none; }
         .check-item input[type="checkbox"] { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent-amber); cursor: pointer; flex-shrink: 0; }
-        .check-label { font-size: calc(var(--font-base) - 1px); color: var(--text-primary); transition: all 0.2s ease; line-height: 1.4; user-select: none; flex: 1; word-break: break-word; }
+        .check-label { font-size: calc(var(--font-base) - 1px); color: var(--text-primary); transition: all 0.2s ease; line-height: 1.4; user-select: none; flex: 1; }
         .check-item input[type="checkbox"]:checked + .check-label { text-decoration: line-through; color: #64748b; }
 
         .calc-input-group { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
@@ -773,7 +748,7 @@
             html += `
                 <div class="ticket-spot-card" onclick="openSpotQR('${spot.spotName}', '${spot.notes || '凭护照原件与此门票图档刷证入园。'}')">
                     <div>
-                        <div style="font-size: var(--font-title); font-weight: bold; color: #fff;">🏛️ ${spot.spotName}</div>
+                        <div style="font-size: var(--font-title); font-weight: bold; color: #fff;">🏛️️ ${spot.spotName}</div>
                         <div style="font-size: 11px; color: var(--accent-green); margin-top: 2px;">✅ 已在 Google Drive 匹配门票</div>
                     </div>
                     <span style="font-size: 18px; color: var(--accent-amber);">📲 查验</span>
@@ -902,4 +877,360 @@
             if (e.touches.length === 2) {
                 startDistance = Math.hypot(
                     e.touches[0].clientX - e.touches[1].clientX,
-                    e.
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+            } else if (e.touches.length === 1) {
+                startX = e.touches[0].clientX - translateX;
+                startY = e.touches[0].clientY - translateY;
+            }
+        }, { passive: true });
+
+        container.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 2 && startDistance > 0) {
+                const newDistance = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+                const zoomFactor = newDistance / startDistance;
+                currentScale = Math.min(Math.max(1, currentScale * zoomFactor), 4);
+                startDistance = newDistance;
+                imgEl.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
+            } else if (e.touches.length === 1 && currentScale > 1) {
+                translateX = e.touches[0].clientX - startX;
+                translateY = e.touches[0].clientY - startY;
+                imgEl.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
+            }
+        }, { passive: true });
+
+        container.addEventListener('touchend', (e) => {
+            if (e.touches.length < 2) startDistance = 0;
+        });
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.remove('active');
+    }
+
+    function openPrepModal(dateKey, dayTitle) {
+        const modal = document.getElementById('prepModal');
+        document.getElementById('prep-modal-title').innerText = `📋 ${dayTitle} 出门注意事项`;
+        
+        const container = document.getElementById('prep-modal-items-container');
+        const items = dailyPrepData[dateKey] || [];
+        
+        let html = '';
+        if (items.length === 0) {
+            html = '<p style="color:var(--text-secondary); font-size:13px;">当日无特殊注意事项。</p>';
+        } else {
+            items.forEach((itemText, idx) => {
+                const checkId = `prep_${dateKey}_${idx}`;
+                const isChecked = isPrepChecked(checkId);
+                html += `
+                    <div class="check-item">
+                        <input type="checkbox" id="${checkId}" ${isChecked ? 'checked' : ''} onchange="togglePrepCheck('${checkId}')">
+                        <label for="${checkId}" class="check-label">${itemText}</label>
+                    </div>
+                `;
+            });
+        }
+        container.innerHTML = html;
+        modal.classList.add('active');
+    }
+
+    function isPrepChecked(id) {
+        const saved = JSON.parse(localStorage.getItem('beijing_prep_checks') || '{}');
+        return !!saved[id];
+    }
+
+    function togglePrepCheck(id) {
+        const saved = JSON.parse(localStorage.getItem('beijing_prep_checks') || '{}');
+        const el = document.getElementById(id);
+        if (el) {
+            saved[id] = el.checked;
+        } else {
+            saved[id] = !saved[id];
+        }
+        localStorage.setItem('beijing_prep_checks', JSON.stringify(saved));
+        renderFullChecklist();
+    }
+
+    function renderFullChecklist() {
+        const container = document.getElementById('full-checklist-container');
+        let html = '';
+
+        tripData.forEach(day => {
+            const items = dailyPrepData[day.date] || [];
+            if (items.length > 0) {
+                html += `
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title" style="margin:0; color:var(--accent-amber);">${day.day} (${day.date})</span>
+                            <span style="font-size:12px; color:var(--text-secondary);">${day.title}</span>
+                        </div>
+                `;
+                items.forEach((itemText, idx) => {
+                    const checkId = `prep_${day.date}_${idx}`;
+                    const isChecked = isPrepChecked(checkId);
+                    html += `
+                        <div class="check-item">
+                            <input type="checkbox" id="full_${checkId}" ${isChecked ? 'checked' : ''} onchange="togglePrepCheck('${checkId}')">
+                            <label for="full_${checkId}" class="check-label">${itemText}</label>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            }
+        });
+        container.innerHTML = html;
+    }
+
+    function populateDayPicker() {
+        const picker = document.getElementById('day-picker');
+        let html = '';
+        tripData.forEach((d, i) => {
+            html += `<option value="${i}">${d.day} (${d.date}) · ${d.title}</option>`;
+        });
+        picker.innerHTML = html;
+    }
+
+    function navigateDay(direction) {
+        const newIndex = currentDayIndex + direction;
+        if (newIndex >= 0 && newIndex < tripData.length) {
+            changeTodayView(newIndex);
+        }
+    }
+
+    function changeTodayView(index) {
+        if (!tripData || tripData.length === 0) return;
+        currentDayIndex = index;
+        const day = tripData[index];
+        
+        const dayPicker = document.getElementById('day-picker');
+        if (dayPicker) dayPicker.value = index;
+
+        document.getElementById('btn-prev-day').disabled = (index === 0);
+        document.getElementById('btn-next-day').disabled = (index === tripData.length - 1);
+
+        const container = document.getElementById('today-timeline-card');
+        let timelineHtml = '<div class="timeline">';
+
+        if (day.timeline && day.timeline.length > 0) {
+            day.timeline.forEach((item, idx) => {
+                let dotClass = 'dot-fixed';
+                let freeTag = '';
+                let timeClass = 'timeline-time';
+
+                if (item.type === 'meal') {
+                    dotClass = 'dot-meal';
+                } else if (item.type === 'free') {
+                    dotClass = 'dot-free';
+                    timeClass = 'timeline-time-free';
+                    freeTag = `<span class="badge badge-free">自由活动</span>`;
+                }
+
+                let subtleMapBtn = '';
+                if (item.mapUrl) {
+                    subtleMapBtn = `<a class="inline-subtle-map" href="${item.mapUrl}" target="_blank">📍地图</a>`;
+                }
+
+                let actionBtns = '';
+                if (item.isTicket) {
+                    const sName = item.spotName || item.text;
+                    actionBtns += `<button class="action-tag-btn btn-ticket" onclick="handleTimelineTicketClick('${sName}', '凭护照原件与此门票图档刷证入园。')">🎫 门票</button>`;
+                } else if (item.isFlight) {
+                    const flightDirection = item.flightDir || 'outbound';
+                    actionBtns += `<button class="action-tag-btn btn-flight" onclick="openFlightDriveLink('${flightDirection}')">✈️ 机票</button>`;
+                }
+
+                if (item.hasPrep) {
+                    actionBtns += `<button class="action-tag-btn btn-prep" onclick="openPrepModal('${day.date}', '${day.day}')">📋 当日注意事项</button>`;
+                }
+
+                let freeDashedBox = '';
+                if (item.type === 'free' && item.freeOptions) {
+                    let listItemsHtml = '';
+                    item.freeOptions.forEach(opt => {
+                        let mapLink = opt.mapUrl ? `<a class="inline-subtle-map" href="${opt.mapUrl}" target="_blank">📍地图</a>` : '';
+                        listItemsHtml += `<li><span>${opt.label}</span>${mapLink}</li>`;
+                    });
+
+                    freeDashedBox = `
+                        <div class="free-flexible-box">
+                            <ul>${listItemsHtml}</ul>
+                        </div>
+                    `;
+                }
+
+                let meetingOutsideBox = '';
+                if (item.meetingInfo && item.meetingInfo.label) {
+                    let mapLink = item.meetingInfo.mapUrl ? `<a class="inline-subtle-map" style="background:var(--accent-red); color:#fff;" href="${item.meetingInfo.mapUrl}" target="_blank">📍地图</a>` : '';
+                    meetingOutsideBox = `
+                        <div class="meeting-box-outside">
+                            <span class="meeting-text">⚠️ 集合提醒：${item.meetingInfo.label}</span>
+                            ${mapLink}
+                        </div>
+                    `;
+                }
+
+                let connectorHtml = '';
+                if (item.transitPill && idx < day.timeline.length - 1) {
+                    connectorHtml = `
+                        <div class="transit-connector">
+                            <span class="transit-pill">${item.transitPill}</span>
+                        </div>
+                    `;
+                }
+
+                timelineHtml += `
+                    <div class="timeline-item">
+                        <div class="timeline-dot-wrapper">
+                            <div class="timeline-dot ${dotClass}"></div>
+                            <div class="${timeClass}">${item.time} ${freeTag}</div>
+                        </div>
+                        <div class="timeline-title">
+                            <span>${item.text}</span>
+                            ${subtleMapBtn}
+                        </div>
+                        ${item.sub ? `<div class="timeline-sub">${item.sub}</div>` : ''}
+                        ${freeDashedBox}
+                        ${meetingOutsideBox}
+                        <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:2px;">
+                            ${actionBtns}
+                        </div>
+                    </div>
+                    ${connectorHtml}
+                `;
+            });
+        }
+
+        timelineHtml += '</div>';
+        container.innerHTML = timelineHtml;
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function setupSwipeGestures() {
+        const target = document.getElementById('page-itinerary-today');
+        if (!target) return;
+
+        target.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        target.addEventListener('touchend', function(e) {
+            const touchEndX = e.changedTouches[0].screenX;
+            const touchEndY = e.changedTouches[0].screenY;
+            
+            const diffX = touchEndX - touchStartX;
+            const diffY = touchEndY - touchStartY;
+
+            if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+                if (diffX < 0) {
+                    navigateDay(1);
+                } else {
+                    navigateDay(-1);
+                }
+            }
+        }, { passive: true });
+    }
+
+    function renderAllDays() {
+        const container = document.getElementById('all-days-container');
+        let html = '';
+        tripData.forEach((day, index) => {
+            html += `
+                <div class="card" onclick="selectDayFromOverview(${index})" style="cursor:pointer;">
+                    <div class="card-header">
+                        <span class="card-title" style="margin:0; font-size:calc(var(--font-base) - 1px); color:var(--accent-amber);">${day.day} (${day.date} ${day.week})</span>
+                        <span class="badge badge-blue">${day.hotel}</span>
+                    </div>
+                    <div style="font-size: var(--font-title); font-weight: bold; color: #fff;">${day.title}</div>
+                    <div style="font-size: calc(var(--font-base) - 2px); color: var(--text-secondary); margin-top: 4px;">交通: ${day.transport} | 点击进入详情 ➔</div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+
+    function selectDayFromOverview(index) {
+        changeTodayView(index);
+        showPage('itinerary-today');
+    }
+
+    function convertCurrency(type) {
+        const myr = document.getElementById('calc-myr');
+        const rmb = document.getElementById('calc-rmb');
+        const rate = 1.55;
+        if (type === 'myr') {
+            rmb.value = (parseFloat(myr.value || 0) * rate).toFixed(2);
+        } else {
+            myr.value = (parseFloat(rmb.value || 0) / rate).toFixed(2);
+        }
+    }
+
+    function getNearestTripIndex() {
+        const now = new Date();
+        const currentMonth = now.getMonth() + 1;
+        const currentDate = now.getDate();
+        
+        let targetIndex = 0;
+        
+        if (currentMonth === 10) {
+            if (currentDate <= 19) {
+                targetIndex = 0;
+            } else if (currentDate >= 30) {
+                targetIndex = tripData.length - 1;
+            } else {
+                const idx = tripData.findIndex(d => d.date === `10/${currentDate}`);
+                if (idx !== -1) targetIndex = idx;
+            }
+        } else if (currentMonth > 10) {
+            targetIndex = tripData.length - 1;
+        } else {
+            targetIndex = 0;
+        }
+        return targetIndex;
+    }
+
+    function updateHomeTodayCard() {
+        if (!tripData || tripData.length === 0) return;
+        const matchedIndex = getNearestTripIndex();
+        const todayData = tripData[matchedIndex];
+        
+        const now = new Date();
+        const isExactMatch = (now.getMonth() + 1 === 10) && (now.getDate() >= 19 && now.getDate() <= 30);
+        
+        document.getElementById('home-today-card-title').innerText = isExactMatch ? '🌤️ 今日行程快览' : '🌤️ 推荐/即将来临行程';
+        document.getElementById('home-date-badge').innerText = `${todayData.day} (${todayData.date})`;
+        document.getElementById('home-today-summary').innerHTML = `
+            <p style="font-weight: bold; color: #fff; font-size:var(--font-title);">${todayData.title}</p>
+            <p style="font-size: calc(var(--font-base) - 1px); color: var(--text-secondary); margin-top: 2px;">🏨 住宿: ${todayData.hotel}</p>
+        `;
+    }
+
+    function goToCurrentOrNearestDay(navBtn) {
+        const matchedIndex = getNearestTripIndex();
+        changeTodayView(matchedIndex);
+        showPage('itinerary-today', navBtn);
+    }
+
+    window.onload = function() {
+        applyFontIndex(currentFontIndex);
+        renderUserDropdown();
+        renderTicketSpots();
+        renderAllDays();
+        populateDayPicker();
+        updateHomeTodayCard();
+        renderFullChecklist();
+        updateSyncStatusDisplay();
+        setupSwipeGestures();
+        setupPinchZoom();
+
+        showPage('home');
+
+        syncTripDataFromSheet(false);
+    };
+</script>
+</body>
+</html>
