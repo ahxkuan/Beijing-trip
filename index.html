@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>北京之旅 2026 | 随身手册</title>
+    
+    <!-- 桌面 Shortcut & PWA 图标配置 (故宫/北京主题) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://cdn-icons-png.flaticon.com/512/307/307415.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://cdn-icons-png.flaticon.com/512/307/307415.png">
+    <link rel="manifest" href="manifest.json">
+    
     <style>
         :root {
             --bg-main: #0b1120;
@@ -45,7 +51,25 @@
             height: 61px;
         }
         .header-left { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-        .brand-icon { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #e11d48, #9f1239); color: #ffffff; font-weight: bold; font-size: 17px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(225, 29, 72, 0.35); flex-shrink: 0; }
+        .brand-icon { 
+            width: 36px; 
+            height: 36px; 
+            border-radius: 10px; 
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-color);
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); 
+            flex-shrink: 0; 
+            padding: 4px;
+        }
+        .brand-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
         
         .header-title h1 { font-size: 16px !important; font-weight: 700; color: #f8fafc; letter-spacing: 0.5px; line-height: 1.2; }
         .header-title p { font-size: 11px !important; color: var(--text-secondary); }
@@ -235,7 +259,18 @@
         .rate-table th { background: #0b1120; color: var(--text-secondary); padding: 8px 10px; font-weight: 600; font-size: calc(var(--font-base) - 1px); border-bottom: 1px solid var(--border-color); }
         .rate-table td { padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #e2e8f0; }
 
-        .ticket-spot-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .ticket-spot-card { 
+            background: var(--bg-card); 
+            border: 1px solid var(--border-color); 
+            border-radius: 12px; 
+            padding: 14px 16px; 
+            margin-bottom: 10px; 
+            cursor: pointer; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center;
+        }
         .ticket-spot-card:active { background: var(--bg-card-hover); }
 
         nav.bottom-nav { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: rgba(11, 17, 32, 0.95); backdrop-filter: blur(12px); border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; padding: 8px 0; z-index: 50; }
@@ -243,14 +278,28 @@
         .nav-item.active { color: #f43f5e; font-weight: bold; }
         .nav-item-icon { font-size: 18px; }
 
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.88); backdrop-filter: blur(8px); z-index: 100; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.88); backdrop-filter: blur(8px); z-index: 100; display: none; align-items: center; justify-content: center; padding: 16px; }
         .modal-overlay.active { display: flex; }
-        .modal-body { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; width: 100%; max-width: 380px; padding: 20px; position: relative; max-height: 85vh; overflow-y: auto; text-align: left; }
+
+        .modal-body { 
+            background: var(--bg-card); 
+            border: 1px solid var(--border-color); 
+            border-radius: 20px; 
+            width: 100%; 
+            max-width: 420px; 
+            height: calc(100dvh - 32px); 
+            padding: 20px; 
+            position: relative; 
+            display: flex;
+            flex-direction: column;
+            text-align: left; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
         .modal-close { position: absolute; top: 14px; right: 16px; background: none; border: none; color: var(--text-secondary); font-size: 22px; cursor: pointer; z-index: 10; }
 
         .zoom-viewport {
             width: 100%;
-            height: 280px;
+            flex: 1;
             margin: 12px 0;
             overflow: hidden;
             border-radius: 12px;
@@ -289,7 +338,9 @@
 <div class="app-container">
     <header id="app-header" class="subpage-header">
         <div class="header-left" onclick="showPage('home')">
-            <div class="brand-icon">京</div>
+            <div class="brand-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/307/307415.png" alt="故宫图标">
+            </div>
             <div class="header-title">
                 <h1>北京之旅 2026</h1>
                 <p>10.19-10.30</p>
@@ -307,7 +358,9 @@
         <div id="page-home" class="page-view active">
             <div class="home-fullscreen-wrapper">
                 <div class="home-top-bar">
-                    <div class="brand-icon">京</div>
+                    <div class="brand-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/307/307415.png" alt="故宫图标">
+                    </div>
                     <div class="font-adjuster">
                         <button class="font-btn" onclick="changeFontSize(-1)">A-</button>
                         <span class="font-indicator" id="font-level-text-home">标准</span>
@@ -396,10 +449,8 @@
                 <select id="user-select-dropdown" onchange="selectUser(this.value)" style="width: 100%; background: #0b1120; border: 1px solid var(--accent-amber); color: #fff; padding: 8px 12px; border-radius: 10px; font-size: var(--font-title); font-weight: bold;">
                     <option value="">-- 正在从 Sheet 提取成员列表... --</option>
                 </select>
-                <p style="font-size: 11px; color: var(--accent-amber); margin-top: 6px;">选择后将精准列出属于该成员的门票图档。</p>
             </div>
 
-            <div class="card-title">🎫 已匹配专属门票列表</div>
             <div id="ticket-spots-list">
             </div>
         </div>
@@ -719,7 +770,6 @@
             container.innerHTML = `
                 <div class="card" style="text-align:center; padding:20px; color:var(--text-secondary);">
                     <p style="font-size:15px; font-weight:bold; color:var(--accent-amber);">👈 请先在上方选择您的名字</p>
-                    <p style="font-size:12px; margin-top:4px;">选择后将仅列出为您匹配到的门票。</p>
                 </div>
             `;
             return;
@@ -736,8 +786,7 @@
         if (userTickets.length === 0) {
             container.innerHTML = `
                 <div class="card" style="text-align:center; padding:20px; color:var(--text-secondary);">
-                    <p style="font-size:14px; color:#f8fafc;">🎟️ 暂未找到属于 <b>${selectedUser}</b> 的门票</p>
-                    <p style="font-size:11px; margin-top:4px;">请确认 Google Sheet 的 Tickets 表中已填写此成员的图片链接。</p>
+                    <p style="font-size:14px; color:#f8fafc;">暂未找到属于 <b>${selectedUser}</b> 的门票</p>
                 </div>
             `;
             return;
@@ -745,13 +794,10 @@
 
         let html = '';
         userTickets.forEach(spot => {
+            const cleanSpotName = spot.spotName ? spot.spotName.replace(/^[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]\s*/u, '') : '';
             html += `
-                <div class="ticket-spot-card" onclick="openSpotQR('${spot.spotName}', '${spot.notes || '凭护照原件与此门票图档刷证入园。'}')">
-                    <div>
-                        <div style="font-size: var(--font-title); font-weight: bold; color: #fff;">🏛 ${spot.spotName}</div>
-                        <div style="font-size: 11px; color: var(--accent-green); margin-top: 2px;">✅ 已在 Google Drive 匹配门票</div>
-                    </div>
-                    <span style="font-size: 18px; color: var(--accent-amber);">📲 查验</span>
+                <div class="ticket-spot-card" onclick="openSpotQR('${cleanSpotName}', '${spot.notes || ''}')">
+                    <div style="font-size: var(--font-title); font-weight: bold; color: #fff;">${cleanSpotName}</div>
                 </div>
             `;
         });
@@ -769,7 +815,7 @@
         const matchedTicket = driveTicketsData[matchKey];
 
         if (matchedTicket && matchedTicket.imageUrl) {
-            openSpotQR(spotName, spotDesc);
+            openSpotQR(spotName, matchedTicket.notes || spotDesc);
         } else {
             alert(`未在 Drive 中匹配到 ${selectedUser} 的 [${spotName}] 门票，正在为您跳转至门票列表页面...`);
             showPage('tickets');
@@ -837,20 +883,25 @@
     }
 
     function openSpotQR(spotName, spotDesc) {
-        document.getElementById('modal-spot-name').innerText = '🎫 ' + spotName;
+        const cleanName = spotName ? spotName.replace(/^[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]\s*/u, '') : '';
+        document.getElementById('modal-spot-name').innerText = cleanName;
         document.getElementById('modal-user-name').innerText = '👤 持票人: ' + (selectedUser || '未选择');
         
         const imgEl = document.getElementById('modal-ticket-img');
-        const matchKey = selectedUser + "_" + spotName;
+        const matchKey = selectedUser + "_" + cleanName;
         const matchedTicket = driveTicketsData[matchKey];
 
         resetZoomTransform();
 
+        const notesText = (matchedTicket && matchedTicket.notes && matchedTicket.notes.trim()) 
+            ? matchedTicket.notes 
+            : (spotDesc && spotDesc.trim() ? spotDesc : '凭护照原件与此门票图档刷证入园。');
+
         if (matchedTicket && matchedTicket.imageUrl) {
             imgEl.src = matchedTicket.imageUrl;
-            document.getElementById('modal-spot-desc').innerText = matchedTicket.notes || spotDesc || '双指捏合可捏合缩放图片，单指按住可拖动。';
         }
         
+        document.getElementById('modal-spot-desc').innerText = notesText;
         document.getElementById('qrModal').classList.add('active');
     }
 
