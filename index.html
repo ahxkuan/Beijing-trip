@@ -239,7 +239,15 @@
         .timeline-time { font-size: calc(var(--font-base) - 1px); font-weight: bold; color: var(--accent-amber); display: flex; align-items: center; gap: 6px; line-height: 1.2; }
         .timeline-time-free { font-size: calc(var(--font-base) - 1px); font-weight: bold; color: var(--accent-blue); display: flex; align-items: center; gap: 6px; line-height: 1.2; }
         .timeline-title { font-size: var(--font-title); font-weight: bold; color: #f8fafc; margin-top: 4px; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
-        .timeline-sub { font-size: calc(var(--font-base) - 1px); color: var(--text-secondary); margin-top: 2px; line-height: 1.5; }
+        
+        .timeline-sub { 
+            font-size: calc(var(--font-base) - 1px); 
+            color: var(--text-secondary); 
+            margin-top: 2px; 
+            line-height: 1.5; 
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
 
         .transit-connector { position: relative; margin: 12px 0 12px -35px; z-index: 1; }
         .transit-pill { display: inline-flex; align-items: center; background: #0b1120; border: 1px solid var(--border-color); color: var(--text-secondary); font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
@@ -252,7 +260,22 @@
         .meeting-box-outside { background: rgba(239, 68, 68, 0.12); border: 1px dashed var(--accent-red); padding: 6px 10px; border-radius: 8px; margin-top: 8px; font-size: calc(var(--font-base) - 1px); font-weight: bold; color: #f87171; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
         .meeting-text { flex: 1; word-break: break-word; }
 
-        .inline-subtle-map { background: rgba(255, 255, 255, 0.08); border: 1px solid var(--border-color); color: var(--text-secondary); padding: 2px 8px; border-radius: 6px; text-decoration: none; font-size: 11px; font-weight: normal; display: inline-flex; align-items: center; white-space: nowrap; flex-shrink: 0; }
+        /* 优化：增加 margin-left 保持舒适间距，移除地图按键中的 emoji */
+        .inline-subtle-map { 
+            background: rgba(255, 255, 255, 0.08); 
+            border: 1px solid var(--border-color); 
+            color: var(--text-secondary); 
+            padding: 2px 8px; 
+            border-radius: 6px; 
+            text-decoration: none; 
+            font-size: 11px; 
+            font-weight: normal; 
+            display: inline-flex; 
+            align-items: center; 
+            white-space: nowrap; 
+            flex-shrink: 0; 
+            margin-left: 6px; 
+        }
         .inline-subtle-map:active { background: var(--bg-card-hover); color: #fff; }
 
         .action-tag-btn { display: inline-flex; align-items: center; gap: 4px; font-size: calc(var(--font-base) - 2px); font-weight: 600; padding: 4px 10px; border-radius: 10px; margin-top: 6px; cursor: pointer; border: none; text-decoration: none; }
@@ -516,7 +539,7 @@
                     <div>
                         <div id="sync-status-text" style="font-size: 11px; color: var(--text-secondary);">上次同步：从未同步</div>
                     </div>
-                    <button onclick="syncTripDataFromSheet(true)" style="background: #10b981; border: none; color: #fff; font-weight: bold; padding: 6px 12px; border-radius: 10px; font-size: 12px; cursor: pointer;">手动态刷新</button>
+                    <button onclick="syncTripDataFromSheet(true)" style="background: #10b981; border: none; color: #fff; font-weight: bold; padding: 6px 12px; border-radius: 10px; font-size: 12px; cursor: pointer;">手动刷新</button>
                 </div>
             </div>
 
@@ -623,7 +646,7 @@
                     <span class="badge badge-red">10/19 - 10/25 (6晚)</span>
                 </div>
                 <p style="font-size: var(--font-base); color: #e2e8f0;">📍 地址：北京市东城区核心地段</p>
-                <a class="btn-link" style="background: #0284c7; font-size:var(--font-base); color:#fff; display:block; text-align:center; padding:8px; border-radius:10px; text-decoration:none; margin-top:8px;" href="https://uri.amap.com/marker?name=太姥山国际商务酒店" target="_blank">🗺️ 高德地图导航</a>
+                <a class="btn-link" style="background: #0284c7; font-size:var(--font-base); color:#fff; display:block; text-align:center; padding:8px; border-radius:10px; text-decoration:none; margin-top:8px;" href="https://uri.amap.com/marker?name=太姥山国际商务酒店" target="_blank">地图导航</a>
             </div>
             <div class="card">
                 <div class="card-header">
@@ -631,7 +654,7 @@
                     <span class="badge badge-amber">10/25 - 10/29 (4晚)</span>
                 </div>
                 <p style="font-size: var(--font-base); color: #e2e8f0;">📍 地址：北京市怀柔区 / 慕田峪长城周边</p>
-                <a class="btn-link" style="background: #0284c7; font-size:var(--font-base); color:#fff; display:block; text-align:center; padding:8px; border-radius:10px; text-decoration:none; margin-top:8px;" href="https://uri.amap.com/marker?name=常来顺农家乐民宿" target="_blank">🗺️ 高德地图导航</a>
+                <a class="btn-link" style="background: #0284c7; font-size:var(--font-base); color:#fff; display:block; text-align:center; padding:8px; border-radius:10px; text-decoration:none; margin-top:8px;" href="https://uri.amap.com/marker?name=常来顺农家乐民宿" target="_blank">地图导航</a>
             </div>
         </div>
 
@@ -1146,7 +1169,7 @@
 
                 let subtleMapBtn = '';
                 if (item.mapUrl) {
-                    subtleMapBtn = `<a class="inline-subtle-map" href="${item.mapUrl}" target="_blank">📍地图</a>`;
+                    subtleMapBtn = `<a class="inline-subtle-map" href="${item.mapUrl}" target="_blank">地图</a>`;
                 }
 
                 let actionBtns = '';
@@ -1166,7 +1189,7 @@
                 if (item.type === 'free' && item.freeOptions) {
                     let listItemsHtml = '';
                     item.freeOptions.forEach(opt => {
-                        let mapLink = opt.mapUrl ? `<a class="inline-subtle-map" href="${opt.mapUrl}" target="_blank">📍地图</a>` : '';
+                        let mapLink = opt.mapUrl ? `<a class="inline-subtle-map" href="${opt.mapUrl}" target="_blank">地图</a>` : '';
                         listItemsHtml += `<li><span>${opt.label}</span>${mapLink}</li>`;
                     });
 
@@ -1179,10 +1202,10 @@
 
                 let meetingOutsideBox = '';
                 if (item.meetingInfo && item.meetingInfo.label) {
-                    let mapLink = item.meetingInfo.mapUrl ? `<a class="inline-subtle-map" style="background:var(--accent-red); color:#fff;" href="${item.meetingInfo.mapUrl}" target="_blank">📍地图</a>` : '';
+                    let mapLink = item.meetingInfo.mapUrl ? `<a class="inline-subtle-map" style="background:var(--accent-red); color:#fff;" href="${item.meetingInfo.mapUrl}" target="_blank">地图</a>` : '';
                     meetingOutsideBox = `
                         <div class="meeting-box-outside">
-                            <span class="meeting-text">⚠️ 集合提醒：${item.meetingInfo.label}</span>
+                            <span class="meeting-text">⚠️ ${item.meetingInfo.label}</span>
                             ${mapLink}
                         </div>
                     `;
