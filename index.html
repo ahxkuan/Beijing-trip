@@ -159,7 +159,31 @@
             box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.35);
         }
         .shortcut-btn-glass:active { transform: scale(0.94); background: rgba(30, 41, 59, 0.85); border-color: var(--accent-amber); }
-        .shortcut-icon { font-size: 20px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+        
+        /* 现代单色 SVG Icon 样式与离线备用 */
+        .modern-icon-box {
+            width: 22px;
+            height: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .modern-icon-box img {
+            width: 22px;
+            height: 22px;
+            filter: brightness(0) invert(1);
+            object-fit: contain;
+        }
+        .nav-item .modern-icon-box img {
+            width: 20px;
+            height: 20px;
+            filter: brightness(0) invert(0.7);
+        }
+        .nav-item.active .modern-icon-box img {
+            filter: invert(36%) sepia(85%) saturate(2480%) hue-rotate(331deg) brightness(101%) contrast(92%);
+        }
+
         .shortcut-label { font-size: calc(var(--font-base) - 3px); font-weight: 600; color: #ffffff; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
 
         .glass-card {
@@ -276,7 +300,6 @@
         nav.bottom-nav { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: rgba(11, 17, 32, 0.95); backdrop-filter: blur(12px); border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; padding: 8px 0; z-index: 50; }
         .nav-item { background: none; border: none; color: var(--text-secondary); font-size: calc(var(--font-base) - 3px); display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; flex: 1; }
         .nav-item.active { color: #f43f5e; font-weight: bold; }
-        .nav-item-icon { font-size: 18px; }
 
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.88); backdrop-filter: blur(8px); z-index: 100; display: none; align-items: center; justify-content: center; padding: 16px; }
         .modal-overlay.active { display: flex; }
@@ -375,43 +398,75 @@
 
                 <div style="margin-top: auto;">
                     <div class="grid-shortcuts">
+                        <!-- 1. 当日行程 -->
                         <div class="shortcut-btn-glass" onclick="goToCurrentOrNearestDay()">
-                            <span class="shortcut-icon">📍</span>
+                            <span class="modern-icon-box">
+                                <img src="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/solid/calendar-days.svg" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <span style="display:none; font-size:18px;">📅</span>
+                            </span>
                             <span class="shortcut-label">当日行程</span>
                         </div>
+                        <!-- 2. 门票预约 -->
                         <div class="shortcut-btn-glass" onclick="showPage('tickets')">
-                            <span class="shortcut-icon">🎫</span>
+                            <span class="modern-icon-box">
+                                <img src="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/solid/ticket.svg" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <span style="display:none; font-size:18px;">🎫</span>
+                            </span>
                             <span class="shortcut-label">门票预约</span>
                         </div>
+                        <!-- 3. 行程总览 -->
                         <div class="shortcut-btn-glass" onclick="showPage('itinerary-all')">
-                            <span class="shortcut-icon">🗓️</span>
+                            <span class="modern-icon-box">
+                                <img src="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/solid/calendar.svg" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <span style="display:none; font-size:18px;">🗓️</span>
+                            </span>
                             <span class="shortcut-label">行程总览</span>
                         </div>
+                        <!-- 4. 汇率换算 -->
                         <div class="shortcut-btn-glass" onclick="showPage('rate')">
-                            <span class="shortcut-icon">💱</span>
+                            <span class="modern-icon-box">
+                                <img src="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/solid/currency-dollar.svg" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <span style="display:none; font-size:18px;">💱</span>
+                            </span>
                             <span class="shortcut-label">汇率换算</span>
                         </div>
+                        <!-- 5. 机票航班 -->
                         <div class="shortcut-btn-glass" onclick="showPage('flights')">
-                            <span class="shortcut-icon">✈️</span>
+                            <span class="modern-icon-box">
+                                <img src="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/solid/paper-airplane.svg" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <span style="display:none; font-size:18px;">✈️</span>
+                            </span>
                             <span class="shortcut-label">机票航班</span>
                         </div>
+                        <!-- 6. 住宿信息 -->
                         <div class="shortcut-btn-glass" onclick="showPage('hotels')">
-                            <span class="shortcut-icon">🏨</span>
+                            <span class="modern-icon-box">
+                                <img src="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/solid/building-office.svg" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <span style="display:none; font-size:18px;">🏨</span>
+                            </span>
                             <span class="shortcut-label">住宿信息</span>
                         </div>
+                        <!-- 7. 行前清单 -->
                         <div class="shortcut-btn-glass" onclick="showPage('checklist')">
-                            <span class="shortcut-icon">🎒</span>
+                            <span class="modern-icon-box">
+                                <img src="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/solid/clipboard-document-check.svg" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <span style="display:none; font-size:18px;">🎒</span>
+                            </span>
                             <span class="shortcut-label">行前清单</span>
                         </div>
+                        <!-- 8. 重要讯息 -->
                         <div class="shortcut-btn-glass" onclick="showPage('info')">
-                            <span class="shortcut-icon">ℹ️</span>
+                            <span class="modern-icon-box">
+                                <img src="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/solid/information-circle.svg" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <span style="display:none; font-size:18px;">ℹ️</span>
+                            </span>
                             <span class="shortcut-label">重要讯息</span>
                         </div>
                     </div>
 
                     <div class="glass-card">
                         <div class="card-header" style="border-bottom-color: rgba(255,255,255,0.15);">
-                            <span class="card-title" style="margin:0; font-size: var(--font-title);" id="home-today-card-title">🌤️ 今日行程快览</span>
+                            <span class="card-title" style="margin:0; font-size: var(--font-title);" id="home-today-card-title">即将来临行程</span>
                             <span class="badge badge-blue" id="home-date-badge">10/19 (Day 0)</span>
                         </div>
                         <div id="home-today-summary" style="font-size: var(--font-base); color: #e2e8f0;">
@@ -459,10 +514,9 @@
             <div class="card" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); margin-bottom: 14px;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div>
-                        <div style="font-size: var(--font-title); font-weight: bold; color: #34d399;">🔄 Google Sheet 实时同步</div>
-                        <div id="sync-status-text" style="font-size: 11px; color: var(--text-secondary); margin-top: 2px;">上次同步：从未同步</div>
+                        <div id="sync-status-text" style="font-size: 11px; color: var(--text-secondary);">上次同步：从未同步</div>
                     </div>
-                    <button onclick="syncTripDataFromSheet(true)" style="background: #10b981; border: none; color: #fff; font-weight: bold; padding: 6px 12px; border-radius: 10px; font-size: 12px; cursor: pointer;">立即刷新</button>
+                    <button onclick="syncTripDataFromSheet(true)" style="background: #10b981; border: none; color: #fff; font-weight: bold; padding: 6px 12px; border-radius: 10px; font-size: 12px; cursor: pointer;">手动态刷新</button>
                 </div>
             </div>
 
@@ -473,15 +527,15 @@
         <div id="page-rate" class="page-view">
             <div class="card">
                 <div class="card-header">
-                    <span class="card-title" style="margin:0;">💱 实时汇率双向计算</span>
-                    <span style="font-size: calc(var(--font-base) - 2px); color: var(--accent-green); font-weight: bold;">1 MYR ≈ 1.55 RMB</span>
+                    <span class="card-title" style="margin:0;">💱 汇率转换</span>
+                    <span style="font-size: calc(var(--font-base) - 2px); color: var(--accent-green); font-weight: bold;">1 MYR ≈ 1.62 RMB</span>
                 </div>
                 <div class="calc-input-group">
                     <div class="calc-box" style="border-color: rgba(245, 158, 11, 0.4);">
                         <label>🇨🇳 人民币 (RMB 块钱)</label>
                         <div class="calc-input-row">
                             <span class="calc-symbol" style="color:#f59e0b;">￥</span>
-                            <input type="number" id="calc-rmb" class="rmb-input" value="155" oninput="convertCurrency('rmb')" placeholder="0.00">
+                            <input type="number" id="calc-rmb" class="rmb-input" value="162" oninput="convertCurrency('rmb')" placeholder="0.00">
                         </div>
                     </div>
                     <div class="calc-box">
@@ -501,12 +555,12 @@
                         <tr><th>人民币 (RMB)</th><th>折合马币 (MYR)</th><th>常见场景参考</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><b>￥10 元</b></td><td>RM 6.45</td><td>地铁单程票 / 矿泉水</td></tr>
-                        <tr><td><b>￥20 元</b></td><td>RM 12.90</td><td>煎饼果子 / 奶茶</td></tr>
-                        <tr><td><b>￥50 元</b></td><td>RM 32.25</td><td>出租车起步 / 快捷简餐</td></tr>
-                        <tr><td><b>￥100 元</b></td><td>RM 64.52</td><td>特色胡同小吃人均</td></tr>
-                        <tr><td><b>￥200 元</b></td><td>RM 129.03</td><td>四季民福烤鸭人均</td></tr>
-                        <tr><td><b>￥500 元</b></td><td>RM 322.58</td><td>一日打车/包车平摊</td></tr>
+                        <tr><td><b>￥10 元</b></td><td>RM 6.17</td><td>地铁单程票 / 矿泉水</td></tr>
+                        <tr><td><b>￥20 元</b></td><td>RM 12.35</td><td>煎饼果子 / 奶茶</td></tr>
+                        <tr><td><b>￥50 元</b></td><td>RM 30.86</td><td>出租车起步 / 快捷简餐</td></tr>
+                        <tr><td><b>￥100 元</b></td><td>RM 61.73</td><td>特色胡同小吃人均</td></tr>
+                        <tr><td><b>￥200 元</b></td><td>RM 123.46</td><td>四季民福烤鸭人均</td></tr>
+                        <tr><td><b>￥500 元</b></td><td>RM 308.64</td><td>一日打车/包车平摊</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -535,9 +589,6 @@
                         <div style="font-size: var(--font-title); font-weight: bold; color: var(--accent-amber); margin-top: 4px;">01:05 <span style="font-size: 10px; color: var(--accent-red);">+1天</span></div>
                     </div>
                 </div>
-                <div style="margin-top: 8px; text-align: center; font-size: calc(var(--font-base) - 1px); color: var(--accent-blue); font-weight: bold; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 8px;">
-                    📂 点击调取【去程】电子机票 (Google Drive) ➔
-                </div>
             </div>
 
             <div class="card" onclick="openFlightDriveLink('inbound')" style="cursor: pointer; transition: transform 0.2s;" onmousedown="this.style.transform='scale(0.98)'" onmouseup="this.style.transform='scale(1)'">
@@ -561,9 +612,6 @@
                         <div style="font-size: calc(var(--font-base) - 2px); color: var(--text-secondary);">吉隆坡</div>
                         <div style="font-size: var(--font-title); font-weight: bold; color: var(--accent-amber); margin-top: 4px;">06:30</div>
                     </div>
-                </div>
-                <div style="margin-top: 8px; text-align: center; font-size: calc(var(--font-base) - 1px); color: var(--accent-blue); font-weight: bold; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 8px;">
-                    📂 点击调取【回程】电子机票 (Google Drive) ➔
                 </div>
             </div>
         </div>
@@ -603,25 +651,41 @@
         </div>
     </main>
 
+    <!-- 底部导航按键列表 -->
     <nav id="app-nav" class="bottom-nav" style="display: none;">
         <button class="nav-item" onclick="showPage('home', this)">
-            <span class="nav-item-icon">🏠</span>
+            <span class="modern-icon-box">
+                <img src="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/solid/home.svg" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span style="display:none; font-size:16px;">🏠</span>
+            </span>
             <span>首页</span>
         </button>
         <button class="nav-item" onclick="goToCurrentOrNearestDay(this)">
-            <span class="nav-item-icon">📍</span>
+            <span class="modern-icon-box">
+                <img src="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/solid/calendar-days.svg" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span style="display:none; font-size:16px;">📅</span>
+            </span>
             <span>当日</span>
         </button>
         <button class="nav-item" onclick="showPage('tickets', this)">
-            <span class="nav-item-icon">🎫</span>
+            <span class="modern-icon-box">
+                <img src="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/solid/ticket.svg" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span style="display:none; font-size:16px;">🎫</span>
+            </span>
             <span>门票</span>
         </button>
         <button class="nav-item" onclick="showPage('itinerary-all', this)">
-            <span class="nav-item-icon">🗓️</span>
+            <span class="modern-icon-box">
+                <img src="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/solid/calendar.svg" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span style="display:none; font-size:16px;">🗓️</span>
+            </span>
             <span>总览</span>
         </button>
         <button class="nav-item" onclick="showPage('rate', this)">
-            <span class="nav-item-icon">💱</span>
+            <span class="modern-icon-box">
+                <img src="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/solid/currency-dollar.svg" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span style="display:none; font-size:16px;">💱</span>
+            </span>
             <span>汇率</span>
         </button>
     </nav>
@@ -1191,6 +1255,7 @@
         const container = document.getElementById('all-days-container');
         let html = '';
         tripData.forEach((day, index) => {
+            const transportText = day.transport ? day.transport : '';
             html += `
                 <div class="card" onclick="selectDayFromOverview(${index})" style="cursor:pointer;">
                     <div class="card-header">
@@ -1198,7 +1263,7 @@
                         <span class="badge badge-blue">${day.hotel}</span>
                     </div>
                     <div style="font-size: var(--font-title); font-weight: bold; color: #fff;">${day.title}</div>
-                    <div style="font-size: calc(var(--font-base) - 2px); color: var(--text-secondary); margin-top: 4px;">交通: ${day.transport} | 点击进入详情 ➔</div>
+                    ${transportText ? `<div style="font-size: calc(var(--font-base) - 3px); color: var(--text-secondary); margin-top: 4px;">${transportText}</div>` : ''}
                 </div>
             `;
         });
@@ -1213,7 +1278,7 @@
     function convertCurrency(type) {
         const myr = document.getElementById('calc-myr');
         const rmb = document.getElementById('calc-rmb');
-        const rate = 1.55;
+        const rate = 1.62;
         if (type === 'myr') {
             rmb.value = (parseFloat(myr.value || 0) * rate).toFixed(2);
         } else {
