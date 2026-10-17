@@ -1253,7 +1253,7 @@
         const now = new Date();
         const isExactMatch = (now.getMonth() + 1 === 10) && (now.getDate() >= 19 && now.getDate() <= 30);
         
-        document.getElementById('home-today-card-title').innerText = isExactMatch ? '🌤️ 今日行程快览' : '🌤️ 推荐/即将来临行程';
+        document.getElementById('home-today-card-title').innerText = isExactMatch ? '今日行程快览' : '即将来临行程';
         document.getElementById('home-date-badge').innerText = `${todayData.day} (${todayData.date})`;
         document.getElementById('home-today-summary').innerHTML = `
             <p style="font-weight: bold; color: #fff; font-size:var(--font-title);">${todayData.title}</p>
